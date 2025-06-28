@@ -630,7 +630,7 @@ public class MainActivity extends AppCompatActivity implements IssuesAdapter.Cal
 
     private String getLocationString() {
         if (!TextUtils.isEmpty(mLatitude) && !TextUtils.isEmpty(mLongitude)) {
-            return mLatitude + "," + mLongitude;
+            return mLatitude +                                                      "," + mLongitude;
 
         } else if (!TextUtils.isEmpty(mAddress)) {
             return mAddress;

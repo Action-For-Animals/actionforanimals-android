@@ -1,0 +1,29 @@
+{
+    "issues": {
+      "1": {
+        "title": "Ban Animal Testing in Cosmetics",
+        "summary": "Urge Congress to support the Humane Cosmetics Act.",
+        "contacts": [
+          {
+            "name": "Senator Jane Doe",
+            "phone": "202-224-3121",
+            "type": "senate"
+          }
+        ],
+        "script": "Hello, I'm calling to ask for your support in banning animal testing in cosmetics. Please support the Humane Cosmetics Act."
+      },
+      "2": {
+        "title": "Protect Endangered Wolves",
+        "summary": "Stop the delisting of gray wolves from the endangered species list.",
+        "contacts": [
+          {
+            "name": "Representative John Smith",
+            "phone": "202-225-3121",
+            "type": "house"
+          }
+        ],
+        "script": "Hi, I’m concerned about the removal of protections for gray wolves. Please vote to keep them on the endangered species list."
+      }
+    }
+  }
+  

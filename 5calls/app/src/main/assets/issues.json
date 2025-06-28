@@ -1,0 +1,16 @@
+[
+  {
+    "id": "ban-fur-sales",
+    "issueType": "local",
+    "name": "Ban Fur Sales in San Diego",
+    "reason": "Fur farming is cruel and unnecessary. San Diego should lead the way in banning it.",
+    "script": "Hi, I'm a resident of San Diego asking you to support a local ban on fur sales. Thank you.",
+    "contacts": [
+      {
+        "name": "Councilmember Jane Doe",
+        "phone": "619-555-1234",
+        "email": "jdoe@sandiego.gov"
+      }
+    ]
+  }
+]

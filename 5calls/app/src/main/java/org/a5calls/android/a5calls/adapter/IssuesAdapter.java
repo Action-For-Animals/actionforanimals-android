@@ -65,6 +65,12 @@ public class IssuesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         mCallback = callback;
     }
 
+    public void setIssues(List<Issue> issues) {
+        this.mIssues = issues;  // or whatever the internal issue list is called
+        notifyDataSetChanged();
+    }
+
+
     /**
      * Sets the full list of available issues. Does not update the visible list unless there
      * is an error; {@code #setFilterAndSearch} should be called separately to update the

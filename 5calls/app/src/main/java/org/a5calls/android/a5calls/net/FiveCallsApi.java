@@ -41,7 +41,9 @@ public class FiveCallsApi {
     // request on the server. This will only work on debug builds.
     protected static final boolean TESTING = true;
 
-    private static final String GET_ISSUES_REQUEST = "https://api.5calls.org/v1/issues";
+    //private static final String GET_ISSUES_REQUEST = "https://api.5calls.org/v1/issues";
+    private static final String GET_ISSUES_REQUEST = "https://testaction-19b48-default-rtdb.firebaseio.com/.json";
+
 
     private static final String GET_CONTACTS_REQUEST = "https://api.5calls.org/v1/reps?location=";
 
