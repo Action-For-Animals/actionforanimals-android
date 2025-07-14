@@ -45,9 +45,11 @@ public class FiveCallsApi {
     private static final String GET_ISSUES_REQUEST = "https://testaction-19b48-default-rtdb.firebaseio.com/.json";
 
 
-    private static final String GET_CONTACTS_REQUEST = "https://api.5calls.org/v1/reps?location=";
+    // private static final String GET_CONTACTS_REQUEST = "https://api.5calls.org/v1/reps?location=";
+    private static final String GET_CONTACTS_REQUEST = "https://getcontacts-uabgeeameq-uc.a.run.app?location=";
 
-    private static final String GET_REPORT = "https://api.5calls.org/v1/report";
+    // private static final String GET_REPORT = "https://api.5calls.org/v1/report";
+    private static final String GET_REPORT = "https://reportcall-uabgeeameq-uc.a.run.app";
 
     private static final String NEWSLETTER_SUBSCRIBE = "https://buttondown.com/api/emails/embed-subscribe/5calls";
 
@@ -293,14 +295,16 @@ public class FiveCallsApi {
         }) {
             @Override
             protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
+                Map<String, String> params = new HashMap<>();
                 params.put("issueid", issueId);
                 params.put("result", result);
                 params.put("contactid", contactId);
                 params.put("via", (BuildConfig.DEBUG && TESTING) ? "test" : "android");
                 params.put("callerid", mCallerId);
+
                 return params;
             }
+
 
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
