@@ -51,7 +51,8 @@ public class FiveCallsApi {
     // private static final String GET_REPORT = "https://api.5calls.org/v1/report";
     private static final String GET_REPORT = "https://reportcall-uabgeeameq-uc.a.run.app";
 
-    private static final String NEWSLETTER_SUBSCRIBE = "https://buttondown.com/api/emails/embed-subscribe/5calls";
+    // private static final String NEWSLETTER_SUBSCRIBE = "https://buttondown.com/api/emails/embed-subscribe/5calls";
+    private static final String NEWSLETTER_SUBSCRIBE = "https://subscribeuser-uabgeeameq-uc.a.run.app";
 
     public interface CallRequestListener {
         void onRequestError();

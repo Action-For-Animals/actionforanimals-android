@@ -140,7 +140,7 @@
 
     <!-- Description of how the 5 Calls app is open-source, link to github page [CHAR_LIMIT=NONE] -->
     <string name="open_source_info">The Action for Animals app is open-source and volunteer made. Find it at
-        <a href="https://github.com/5calls/android\">github</a>.</string>
+        <a href="https://github.com/riya-235/android">github</a>.</string>
 
     <!-- Version code shown to the user in the about page [CHAR_LIMIT=NONE] -->
     <string name="version_info">Version <xliff:g id="versionName">%1$s</xliff:g> (<xliff:g id="versionCode">%2$d</xliff:g>)</string>
@@ -417,10 +417,10 @@
     <string name="update">update</string>
 
     <!-- URL for the 5 Calls Facebook page -->
-    <string name="facebook_url" translatable="false">https://www.facebook.com/make5calls/</string>
+    <string name="facebook_url" translatable="false">https://www.facebook.com/groups/1554649705329105</string>
 
     <!-- URL for the 5 Calls Instagram account -->
-    <string name="instagram_url" translatable="false">https://www.instagram.com/5calls/</string>
+    <string name="instagram_url" translatable="false">https://www.instagram.com/sxfaorg/</string>
 
     <!-- URL for the 5 Calls Bluesky account -->
     <string name="bluesky_url" translatable="false">https://bsky.app/profile/5calls.org</string>
@@ -429,10 +429,10 @@
     <string name="mastodon_url" translatable="false">https://mastodon.social/@5calls</string>
 
     <!-- URL for the 5 Calls Threads account -->
-    <string name="threads_url" translatable="false">https://www.threads.net/@5calls</string>
+    <string name="threads_url" translatable="false">https://www.threads.com/@sxfaorg</string>
 
     <!-- URL for the 5 Calls About page [CHAR_LIMIT=NONE] -->
-    <string name="about_url" translatable="false">https://5calls.org/about-us/</string>
+    <string name="about_url" translatable="false">https://sxfa.org</string>
 
     <!-- URL for the 5 Calls FAQ page [CHAR_LIMIT=NONE] -->
     <string name="faq_url" translatable="false">https://5calls.org/getting-started/</string>
@@ -441,7 +441,7 @@
     <string name="why_calling_url" translatable="false">https://5calls.org/why-calling-works/</string>
 
     <!-- Email address to contact 5 Calls [CHAR_LIMIT=NONE] -->
-    <string name="email_address" translatable="false">hello@5calls.org</string>
+    <string name="email_address" translatable="false">hellosxfa@gmail.com</string>
 
     <!-- Default subject for an email sent from the about page [CHAR_LIMIT=NONE] -->
     <string name="email_subject" translatable="false">Feedback from Action for Animals Android App</string>
