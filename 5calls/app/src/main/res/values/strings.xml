@@ -106,7 +106,7 @@
     <string name="rate_us_btn">Rate Action for Animals</string>
 
     <!-- Button linking to the privacy policy [CHAR_LIMIT=30] -->
-    <string name="privacy_btn">Privacy Policy</string>
+     <string name="privacy_btn">Privacy Policy</string>
 
     <!-- Text to show the user the number of calls made by everyone [CHAR_LIMIT=50] -->
     <string name="calls_to_date">Together we\'ve made <xliff:g id="callCount">%1$s</xliff:g> calls</string>
@@ -369,13 +369,13 @@
     <string name="share_subject">I\'ve used Action for Animals to make an impact</string>
 
     <!-- Content of an email or message shared from the "Your Impact" screen sharing how many calls you've made [CHAR_LIMIT=NONE] -->
-    <string name="share_content">I\'ve made <xliff:g id="call_count">%1$d</xliff:g> calls to my reps - join me at 5calls.org</string>
+    <string name="share_content">I\'ve made <xliff:g id="call_count">%1$d</xliff:g> calls to my reps - join me at https://actionforanimals.substack.com/</string>
 
     <!-- Subject for an email sent from an issue detail screen sharing an issue [CHAR_LIMIT=200] -->
     <string name="issue_share_subject">I want you to know about this issue I found on Action for Animals</string>
 
     <!-- Content of an email or message shared from an issue detail screen sharing an issue [CHAR_LIMIT=NONE] -->
-    <string name="issue_share_content">I just called my reps to <xliff:g id="issue_summary">%1$s</xliff:g> — you should too: http://5calls.org/issue/<xliff:g id="issue_id">%2$s</xliff:g></string>
+    <string name="issue_share_content">I just called my reps to <xliff:g id="issue_summary">%1$s</xliff:g> — you should too: https://actionforanimals.substack.com/p/<xliff:g id="issue_id">%2$s</xliff:g></string>
 
     <!-- Stats activity line chart title [CHAR_LIMIT=100] -->
     <string name="line_chart_title">Impact over time</string>
@@ -420,28 +420,28 @@
     <string name="facebook_url" translatable="false">https://www.facebook.com/groups/1554649705329105</string>
 
     <!-- URL for the 5 Calls Instagram account -->
-    <string name="instagram_url" translatable="false">https://www.instagram.com/sxfaorg/</string>
+    <string name="instagram_url" translatable="false">https://www.instagram.com/xfaorg/</string>
 
     <!-- URL for the 5 Calls Bluesky account -->
-    <string name="bluesky_url" translatable="false">https://bsky.app/profile/5calls.org</string>
+    <string name="bluesky_url" translatable="false">https://bsky.app/profile/xfaorg.bsky.social</string>
 
     <!-- URL for the 5 Calls Mastodon account -->
-    <string name="mastodon_url" translatable="false">https://mastodon.social/@5calls</string>
+    <string name="mastodon_url" translatable="false">https://mastodon.social/@xfaorg</string>
 
     <!-- URL for the 5 Calls Threads account -->
-    <string name="threads_url" translatable="false">https://www.threads.com/@sxfaorg</string>
+    <string name="threads_url" translatable="false">https://www.threads.com/@xfaorg</string>
 
     <!-- URL for the 5 Calls About page [CHAR_LIMIT=NONE] -->
-    <string name="about_url" translatable="false">https://sxfa.org</string>
+    <string name="about_url" translatable="false">https://actionforanimals.substack.com/p/about-us</string>
 
     <!-- URL for the 5 Calls FAQ page [CHAR_LIMIT=NONE] -->
-    <string name="faq_url" translatable="false">https://5calls.org/getting-started/</string>
+    <string name="faq_url" translatable="false">https://actionforanimals.substack.com/p/getting-started</string>
 
     <!-- URL for the 5 Calls Why Calling Works page [CHAR_LIMIT=NONE] -->
-    <string name="why_calling_url" translatable="false">https://5calls.org/why-calling-works/</string>
+    <string name="why_calling_url" translatable="false">https://actionforanimals.substack.com/p/why-calling-works</string>
 
     <!-- Email address to contact 5 Calls [CHAR_LIMIT=NONE] -->
-    <string name="email_address" translatable="false">hellosxfa@gmail.com</string>
+    <string name="email_address" translatable="false">howdyxfa@gmail.com</string>
 
     <!-- Default subject for an email sent from the about page [CHAR_LIMIT=NONE] -->
     <string name="email_subject" translatable="false">Feedback from Action for Animals Android App</string>

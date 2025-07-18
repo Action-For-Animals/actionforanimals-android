@@ -65,16 +65,16 @@ public class AboutActivity extends AppCompatActivity {
                 AboutActivity.this, Uri.parse(getString(R.string.why_calling_url))));
 
         binding.privacyButton.setOnClickListener(v -> CustomTabsUtil.launchUrl(
-                AboutActivity.this, Uri.parse("https://5calls.org/privacy")));
+                AboutActivity.this, Uri.parse("https://sxfa.org/")));
 
         setOpenIntentWithChooserOnClick(
                 binding.contactUsButton, getSendEmailIntent(getResources()), getString(R.string.send_email)
         );
 
-        setOpenIntentOnClick(
+        /* setOpenIntentOnClick(
                 binding.facebookButton,
                 getActionIntent(getString(R.string.facebook_url))
-        );
+        ); */
 
         setOpenIntentOnClick(
                 binding.instagramButton,
@@ -86,7 +86,7 @@ public class AboutActivity extends AppCompatActivity {
                 getActionIntent(getString(R.string.bluesky_url))
         );
 
-        setOpenIntentOnClick(
+       setOpenIntentOnClick(
                 binding.mastodonButton,
                 getActionIntent(getString(R.string.mastodon_url))
         );

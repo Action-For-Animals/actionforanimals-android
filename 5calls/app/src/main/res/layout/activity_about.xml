@@ -80,12 +80,12 @@
             android:text="@string/bluesky_btn"
             />
 
-        <Button
+        <!--- <Button
             android:id="@+id/facebook_button"
             style="@style/fullWidthBtnStyle"
             android:layout_margin="0dp"
             android:text="@string/facebook_btn"
-            />
+            /> -->
 
         <Button
             android:id="@+id/instagram_button"
@@ -102,126 +102,126 @@
             />
 
         <Button
-            android:id="@+id/mastodon_button"
-            style="@style/fullWidthBtnStyle"
-            android:layout_margin="0dp"
-            android:text="@string/mastodon_btn"
-            />
+             android:id="@+id/mastodon_button"
+             style="@style/fullWidthBtnStyle"
+             android:layout_margin="0dp"
+             android:text="@string/mastodon_btn"
+             />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/newsletter_signup_view"
-            >
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="vertical"
+             android:id="@+id/newsletter_signup_view"
+             >
 
-            <LinearLayout
-                android:id="@+id/newsletter_card_result_success"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone"
-                >
+             <LinearLayout
+                 android:id="@+id/newsletter_card_result_success"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="vertical"
+                 android:visibility="gone"
+                 >
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/newsletter_success_title"
-                    style="@style/aboutPrompt"
-                    />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="@string/newsletter_success_title"
+                     style="@style/aboutPrompt"
+                     />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/newsletter_success_description"
-                    style="@style/paragraphTextStyle"
-                    />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="@string/newsletter_success_description"
+                     style="@style/paragraphTextStyle"
+                     />
 
-            </LinearLayout>
+             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/newsletter_card"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
+             <LinearLayout
+                 android:id="@+id/newsletter_card"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="vertical"
+                 >
 
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="@string/newsletter_signup_title"
-                    style="@style/aboutPrompt"
-                    />
+                 <TextView
+                     android:layout_height="wrap_content"
+                     android:layout_width="wrap_content"
+                     android:text="@string/newsletter_signup_title"
+                     style="@style/aboutPrompt"
+                     />
 
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="@string/newsletter_signup_description"
-                    style="@style/paragraphTextStyle"
-                    />
+                 <TextView
+                     android:layout_height="wrap_content"
+                     android:layout_width="wrap_content"
+                     android:text="@string/newsletter_signup_description"
+                     style="@style/paragraphTextStyle"
+                     />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    >
+                 <LinearLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:orientation="horizontal"
+                     >
 
-                    <EditText
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:minHeight="@dimen/accessibility_min_size"
-                        android:autofillHints="emailAddress"
-                        android:hint="@string/newsletter_signup_hint"
-                        android:inputType="textEmailAddress"
-                        android:id="@+id/newsletter_email"
-                        android:layout_weight="1"
-                        />
+                     <EditText
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:minHeight="@dimen/accessibility_min_size"
+                         android:autofillHints="emailAddress"
+                         android:hint="@string/newsletter_signup_hint"
+                         android:inputType="textEmailAddress"
+                         android:id="@+id/newsletter_email"
+                         android:layout_weight="1"
+                         />
 
-                    <Button
-                        style="@style/genericButtonStyle"
-                        android:text="@string/newsletter_sign_up"
-                        android:id="@+id/newsletter_signup_button"
-                        />
+                     <Button
+                         style="@style/genericButtonStyle"
+                         android:text="@string/newsletter_sign_up"
+                         android:id="@+id/newsletter_signup_button"
+                         />
 
-                </LinearLayout>
+                 </LinearLayout>
 
-            </LinearLayout>
+             </LinearLayout>
 
-        </LinearLayout>
+         </LinearLayout>
 
-        <TextView
-            style="@style/aboutPrompt"
-            android:text="@string/about_app_prompt"
-            />
+         <TextView
+             style="@style/aboutPrompt"
+             android:text="@string/about_app_prompt"
+             />
 
 
-        <TextView
-            style="@style/paragraphTextStyle"
-            android:text="@string/rate_us_prompt"
-            />
+         <TextView
+             style="@style/paragraphTextStyle"
+             android:text="@string/rate_us_prompt"
+             />
 
-        <Button
-            android:id="@+id/rate_us_button"
-            style="@style/fullWidthBtnStyle"
-            android:text="@string/rate_us_btn"
-            />
+         <Button
+             android:id="@+id/rate_us_button"
+             style="@style/fullWidthBtnStyle"
+             android:text="@string/rate_us_btn"
+             />
 
-        <Button
-            android:id="@+id/license_button"
-            style="@style/fullWidthBtnStyle"
-            android:text="@string/license_btn"
-            />
+         <Button
+             android:id="@+id/license_button"
+             style="@style/fullWidthBtnStyle"
+             android:text="@string/license_btn"
+             />
 
-        <TextView
-            style="@style/paragraphTextStyle"
-            android:text="@string/open_source_info"
-            android:id="@+id/github_textview"
-            />
+         <TextView
+             style="@style/paragraphTextStyle"
+             android:text="@string/open_source_info"
+             android:id="@+id/github_textview"
+             />
 
-        <TextView
-            android:id="@+id/version_info"
-            style="@style/paragraphTextStyle"
-            android:layout_marginTop="@dimen/margin_top16"
-            />
-    </LinearLayout>
-</ScrollView>
+         <TextView
+             android:id="@+id/version_info"
+             style="@style/paragraphTextStyle"
+             android:layout_marginTop="@dimen/margin_top16"
+             />
+     </LinearLayout>
+ </ScrollView>
