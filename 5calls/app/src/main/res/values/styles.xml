@@ -9,15 +9,20 @@
         <item name="android:alertDialogTheme">@style/AppTheme.Dialog</item>
     </style>
 
+
     <style name="AppTheme.NoBarTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorButtonNormal">@color/button_color</item>
         <item name="android:alertDialogTheme">@style/AppTheme.Dialog</item>
+        <item name="android:windowBackground">@color/ic_launcher_background_back</item>
     </style>
 
-    <style name="AppTheme.NoBarTheme.MainActivity" parent="AppTheme.NoBarTheme" />
+    <style name="AppTheme.NoBarTheme.MainActivity" parent="AppTheme.NoBarTheme" >
+    </style>
+
+
 
     <style name="AppTheme.Dialog" parent="@style/Theme.AppCompat.Light.Dialog">
         <item name="colorPrimary">@color/colorPrimary</item>
