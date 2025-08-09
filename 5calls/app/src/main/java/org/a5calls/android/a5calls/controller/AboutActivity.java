@@ -65,7 +65,7 @@ public class AboutActivity extends AppCompatActivity {
                 AboutActivity.this, Uri.parse(getString(R.string.why_calling_url))));
 
         binding.privacyButton.setOnClickListener(v -> CustomTabsUtil.launchUrl(
-                AboutActivity.this, Uri.parse("https://sxfa.org/")));
+                AboutActivity.this, Uri.parse("https://actionforanimals.substack.com/p/privacy")));
 
         setOpenIntentWithChooserOnClick(
                 binding.contactUsButton, getSendEmailIntent(getResources()), getString(R.string.send_email)

@@ -55,13 +55,13 @@
     <string name="about_header">MAKE YOUR VOICE HEARD</string>
 
     <!-- First paragraph of About screen text [CHAR_LIMIT=NONE] -->
-    <string name="about_p1">Turn your passive participation into active resistance. Action for Animals is the easiest and most effective way for U.S. constituents to make a political impact.</string>
+    <string name="about_p1">Turn your concern for animals into political power. Action for Animals makes it easy and effective for U.S. constituents to take action for animals and push for change.</string>
 
     <!-- Call to action, 'Spend 5 minutes, make 5 calls' [CHAR_LIMIT=] -->
-    <string name="about_p2">Spend 5 minutes, make 5 calls.</string>
+    <string name="about_p2">A minute for you. A life for them.</string>
 
     <!-- Body of text on the About 5 Calls screen, describing the app. \n\n is used to start the next paragraph. [CHAR_LIMIT=NONE] -->
-    <string name="about_p3">Action for Animals connects you directly with your representatives via phone numbers sourced from public government websites, we do not represent any specific government entity, regardless of political party.</string>
+    <string name="about_p3">Action for Animals connects you directly with your representatives using publicly available contact information. We are not affiliated with any government entity or political party.</string>
 
     <!-- Button linking to a page about Why calling works [CHAR_LIMIT=30] -->
     <string name="why_calling_btn">why calling works</string>
@@ -87,8 +87,8 @@
     <!-- Heading for buttons to connect with 5 Calls through social media [CHAR_LIMIT=100] -->
     <string name="social_prompt">Follow us on your favorite platform</string>
 
-    <!-- Button that links to 5 Calls' Facebook [CHAR_LIMIT=30] -->
-    <string name="facebook_btn" translatable="false">Facebook</string>
+    <!-- Button that links to 5 Calls' Facebook [CHAR_LIMIT=30]
+    <string name="facebook_btn" translatable="false">Facebook</string> -->
 
     <!-- Button that links to 5 Calls' Instagram [CHAR_LIMIT=30] -->
     <string name="instagram_btn" translatable="false">Instagram</string>
@@ -112,10 +112,10 @@
     <string name="calls_to_date">Together we\'ve made <xliff:g id="callCount">%1$s</xliff:g> calls</string>
 
     <!-- Text shown to the user on the splash / tutorial screen describing the 5 Calls app. \n\n is used to create new paragraphs. [CHAR_LIMIT=NONE] -->
-    <string name="about_splash">There\'s one simple and straightforward way to influence the Government that is supposed to represent you: Call them on the phone.</string>
+    <string name="about_splash">There\'s one simple, powerful way to influence the government on behalf of animals: Call them.</string>
 
     <!-- Tutorial screen text that calling is effective [CHAR_LIMIT=100] -->
-    <string name="about_p2_2">Calling is the most effective way to influence your representatives.</string>
+    <string name="about_p2_2">Calling is one of the most effective ways to influence your representatives on behalf of animals.</string>
 
     <!-- Text shown to the user on the splash / tutorial screen describing more about the 5 Calls app. \n\n is used to create new paragraphs. [CHAR_LIMIT=NONE] -->
     <string name="about_splash_2">Action for Animals provides phone numbers and scripts so calling is quick and easy, finds your local representatives so your calls have more impact.</string>
@@ -139,6 +139,7 @@
     <string name="get_started_btn">Get started</string>
 
     <!-- Description of how the 5 Calls app is open-source, link to github page [CHAR_LIMIT=NONE] -->
+    <!-- NEED TO DECIDED IF WE ARE MAKING IT OPEN SOURCE -->
     <string name="open_source_info">The Action for Animals app is open-source and volunteer made. Find it at
         <a href="https://github.com/riya-235/android">github</a>.</string>
 
@@ -331,10 +332,10 @@
     <string name="no_days_selected">No days selected</string>
 
     <!-- Title for a notification reminder to make 5 calls [CHAR_LIMIT=30 -->
-    <string name="notification_title">Make your voice heard</string>
+    <string name="notification_title">Make your voice heard—for the animals.</string>
 
     <!-- Text for a notification reminder to make 5 calls [CHAR_LIMIT=50] -->
-    <string name="notification_text">Spend 5 minutes to contact your representatives.</string>
+    <string name="notification_text">Spend 1 minute to contact your representatives.</string>
 
     <!-- Button to go to the settings activity [CHAR_LIMIT=25] -->
     <string name="go_to_settings">Go to settings</string>
@@ -557,7 +558,7 @@
     <string name="newsletter_signup_title">Get updates on the latest issues</string>
 
     <!-- Description of the newsletter. -->
-    <string name="newsletter_signup_description">Sign up for our newsletter, just one email a week</string>
+    <string name="newsletter_signup_description">Sign up for our newsletter, just one email a quarter</string>
 
     <!-- Placeholder text in newsletter signup form box for a user to enter their email. -->
     <string name="newsletter_signup_hint">Enter your email</string>
@@ -599,7 +600,7 @@
     <string name="done_issue_stats">Total calls on this topic:</string>
 
     <!-- In the issue done section, a description of why calls help for further user motivation. -->
-    <string name="done_description2">Your calls help your representatives decide what issues are most important to their constituents and can help direct their positions on policy that makes a difference in the lives of all Americans.</string>
+    <string name="done_description2">Your calls help representatives understand which animal protection issues matter most to their constituents and guide their decisions on policies that make a real difference for animals.</string>
 
     <!-- In the issue done section, a prompt to share the call. -->
     <string name="done_share_prompt">Share this issue</string>

@@ -71,7 +71,7 @@ public class IssueActivity extends AppCompatActivity {
 
     private static final int REP_CALL_REQUEST_CODE = 1;
 
-    private static final String DONATE_URL = "https://secure.actblue.com/donate/5calls-donate?refcode=android&refcode2=";
+    // private static final String DONATE_URL = "https://secure.actblue.com/donate/5calls-donate?refcode=android&refcode2=";
 
     private static final int MIN_CALLS_TO_SHOW_CALL_STATS = 10;
 
@@ -321,13 +321,15 @@ public class IssueActivity extends AppCompatActivity {
                 R.string.share_chooser_title)));
     }
 
+
+    /**
     private void launchDonate() {
         // Could send analytics on donate event.
 
         String donateUrl = DONATE_URL + AccountManager.Instance.getCallerID(this);
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(donateUrl)));
     }
-
+    */
     /**
      * Loads the representatives-to-call list at the bottom.
      * @return true if each rep has been called at least once.
@@ -430,13 +432,14 @@ public class IssueActivity extends AppCompatActivity {
                 String.format(Locale.getDefault(), "%,d", mIssue.stats.calls));
 
         findViewById(R.id.share_btn).setOnClickListener(v -> sendShare());
-
+        /**
         if (mDonateIsOn) {
             findViewById(R.id.donate_section).setVisibility(View.VISIBLE);
             findViewById(R.id.donate_btn).setOnClickListener(v -> launchDonate());
         } else {
             findViewById(R.id.donate_section).setVisibility(View.GONE);
         }
+         */
     }
 
     @Override
