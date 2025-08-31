@@ -116,7 +116,7 @@
 
     <!-- Description of how the 5 Calls app is open-source, link to github page [CHAR_LIMIT=NONE] -->
     <string name="open_source_info">La app Acción para los Animales es de código abierto y hecha por voluntarios. Encuéntrala en
-        <a href="https://github.com/riya-235/android">GitHub</a>.</string>
+        <a href="https://github.com/Action-For-Animals">GitHub</a>.</string>
 
     <!-- Version code shown to the user in the about page [CHAR_LIMIT=NONE] -->
     <string name="version_info">Versión <xliff:g id="versionName">%1$s</xliff:g> (<xliff:g id="versionCode">%2$d</xliff:g>)</string>
