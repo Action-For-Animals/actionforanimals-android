@@ -106,7 +106,7 @@
              android:layout_margin="0dp"
              android:text="@string/mastodon_btn"
              />
-<!---
+
          <LinearLayout
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
@@ -188,7 +188,7 @@
              </LinearLayout>
 
          </LinearLayout>
--->
+
          <TextView
              style="@style/aboutPrompt"
              android:text="@string/about_app_prompt"
