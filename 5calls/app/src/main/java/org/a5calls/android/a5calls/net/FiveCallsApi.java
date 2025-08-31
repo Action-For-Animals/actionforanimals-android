@@ -52,7 +52,7 @@ public class FiveCallsApi {
     private static final String GET_REPORT = "https://reportcall-wv7gpk3bya-uc.a.run.app";
 
     // private static final String NEWSLETTER_SUBSCRIBE = "https://buttondown.com/api/emails/embed-subscribe/5calls";
-    private static final String NEWSLETTER_SUBSCRIBE = "https://subscribeuser-uabgeeameq-uc.a.run.app";
+    // private static final String NEWSLETTER_SUBSCRIBE = "";
 
     public interface CallRequestListener {
         void onRequestError();
@@ -318,7 +318,7 @@ public class FiveCallsApi {
         // Add the request to the RequestQueue.
         mRequestQueue.add(request);
     }
-
+/*
     public void newsletterSubscribe(String email, NewsletterSubscribeCallback callback) {
         StringRequest request = new StringRequest(Request.Method.POST, NEWSLETTER_SUBSCRIBE,
                 new Response.Listener<String>() {
@@ -351,7 +351,7 @@ public class FiveCallsApi {
         // Add the request to the RequestQueue.
         mRequestQueue.add(request);
     }
-
+*/
     private void onRequestError(VolleyError error) {
         for (CallRequestListener listener : mCallRequestListeners) {
             listener.onRequestError();

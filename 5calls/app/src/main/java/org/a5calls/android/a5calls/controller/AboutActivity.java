@@ -121,7 +121,7 @@ public class AboutActivity extends AppCompatActivity {
         });
 
         binding.githubTextview.setMovementMethod(LinkMovementMethod.getInstance());
-
+/*
         if (!accountManager.isNewsletterSignUpCompleted(this)) {
             binding.newsletterSignupView.setVisibility(View.GONE);
             binding.newsletterSignupButton.setOnClickListener(v -> {
@@ -152,7 +152,7 @@ public class AboutActivity extends AppCompatActivity {
                 });
             });
         }
-
+*/
         binding.versionInfo.setText(String.format(getResources().getString(R.string.version_info),
                 BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE));
 
@@ -212,9 +212,9 @@ public class AboutActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        if (accountManager.isNewsletterSignUpCompleted(this)) {
-            binding.newsletterSignupView.setVisibility(View.GONE);
-        }
+        // if (accountManager.isNewsletterSignUpCompleted(this)) {
+           // binding.newsletterSignupView.setVisibility(View.GONE);
+        // }
     }
 
     // Inspired by https://www.bignerdranch.com/blog/open-source-licenses-and-android/

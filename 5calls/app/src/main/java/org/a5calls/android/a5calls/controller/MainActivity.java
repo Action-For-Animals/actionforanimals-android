@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements IssuesAdapter.Cal
         }
 
         setupDrawerContent(binding.navigationView);
-
+/*
         if (!accountManager.isNewsletterPromptDone(this)) {
             binding.newsletterSignupView.setVisibility(View.GONE);
             binding.newsletterView.newsletterDeclineButton.setOnClickListener(new View.OnClickListener() {
@@ -183,6 +183,7 @@ public class MainActivity extends AppCompatActivity implements IssuesAdapter.Cal
                 }
             });
         }
+        */
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         binding.issuesRecyclerView.setLayoutManager(layoutManager);
@@ -284,12 +285,12 @@ public class MainActivity extends AppCompatActivity implements IssuesAdapter.Cal
         mAddress = accountManager.getAddress(this);
         mLatitude = accountManager.getLat(this);
         mLongitude = accountManager.getLng(this);
-
+/*
         if (accountManager.isNewsletterPromptDone(this) ||
                 accountManager.isNewsletterSignUpCompleted(this)) {
             binding.newsletterSignupView.setVisibility(View.GONE);
         }
-
+*/
         // Refresh on resume. The post is necessary to start the spinner animation.
         // Note that refreshing issues will also refresh the contacts list when it runs
         // on resume.
