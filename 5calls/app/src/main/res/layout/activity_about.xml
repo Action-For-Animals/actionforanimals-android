@@ -29,8 +29,7 @@
 
         <TextView
             style="@style/paragraphTextStyle"
-            android:text="@string/about_p3"
-            />
+            android:text="@string/about_p3" />
 
         <TextView
             android:id="@+id/calls_to_date"
@@ -153,6 +152,7 @@
                      style="@style/aboutPrompt"
                      />
 
+
                  <TextView
                      android:layout_height="wrap_content"
                      android:layout_width="wrap_content"
@@ -206,7 +206,13 @@
              android:text="@string/rate_us_btn"
              />
 
-         <Button
+        <Button
+            android:id="@+id/five_calls_github_button"
+            style="@style/fullWidthBtnStyle"
+            android:text="@string/five_calls_ack_btn"
+            />
+
+        <Button
              android:id="@+id/license_button"
              style="@style/fullWidthBtnStyle"
              android:text="@string/license_btn"

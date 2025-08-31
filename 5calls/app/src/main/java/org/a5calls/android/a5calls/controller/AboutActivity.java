@@ -65,7 +65,7 @@ public class AboutActivity extends AppCompatActivity {
                 AboutActivity.this, Uri.parse(getString(R.string.why_calling_url))));
 
         binding.privacyButton.setOnClickListener(v -> CustomTabsUtil.launchUrl(
-                AboutActivity.this, Uri.parse("https://actionforanimals.substack.com/p/privacy")));
+                AboutActivity.this, Uri.parse(getString(R.string.privacy_url))));
 
         setOpenIntentWithChooserOnClick(
                 binding.contactUsButton, getSendEmailIntent(getResources()), getString(R.string.send_email)
@@ -75,6 +75,11 @@ public class AboutActivity extends AppCompatActivity {
                 binding.facebookButton,
                 getActionIntent(getString(R.string.facebook_url))
         ); */
+
+        setOpenIntentOnClick(
+                binding.fiveCallsGithubButton,
+                getActionIntent(getString(R.string.five_calls_github_url))
+        );
 
         setOpenIntentOnClick(
                 binding.instagramButton,
@@ -118,7 +123,7 @@ public class AboutActivity extends AppCompatActivity {
         binding.githubTextview.setMovementMethod(LinkMovementMethod.getInstance());
 
         if (!accountManager.isNewsletterSignUpCompleted(this)) {
-            binding.newsletterSignupView.setVisibility(View.VISIBLE);
+            binding.newsletterSignupView.setVisibility(View.GONE);
             binding.newsletterSignupButton.setOnClickListener(v -> {
                 String email = binding.newsletterEmail.getText().toString();
                 if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {

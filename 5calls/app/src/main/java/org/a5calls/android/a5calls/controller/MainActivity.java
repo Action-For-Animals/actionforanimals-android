@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements IssuesAdapter.Cal
         setupDrawerContent(binding.navigationView);
 
         if (!accountManager.isNewsletterPromptDone(this)) {
-            binding.newsletterSignupView.setVisibility(View.VISIBLE);
+            binding.newsletterSignupView.setVisibility(View.GONE);
             binding.newsletterView.newsletterDeclineButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -463,8 +463,7 @@ public class MainActivity extends AppCompatActivity implements IssuesAdapter.Cal
                                            List<Contact> contacts) {
                 mLocationName = TextUtils.isEmpty(locationName) ?
                         getResources().getString(R.string.unknown_location) : locationName;
-                binding.collapsingToolbar.setTitle(String.format(getResources().getString(
-                        R.string.title_main), mLocationName));
+                binding.collapsingToolbar.setTitle(mLocationName);
                 mIssuesAdapter.setContacts(contacts, IssuesAdapter.NO_ERROR);
                 mIsLowAccuracy = isLowAccuracy;
 
@@ -630,7 +629,7 @@ public class MainActivity extends AppCompatActivity implements IssuesAdapter.Cal
 
     private String getLocationString() {
         if (!TextUtils.isEmpty(mLatitude) && !TextUtils.isEmpty(mLongitude)) {
-            return mLatitude +                                                      "," + mLongitude;
+            return mLatitude + "," + mLongitude;
 
         } else if (!TextUtils.isEmpty(mAddress)) {
             return mAddress;

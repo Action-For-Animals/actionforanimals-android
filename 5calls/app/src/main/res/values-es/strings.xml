@@ -1,7 +1,7 @@
 <resources xmlns:xliff="http://schemas.android.com/tools">
 
     <!-- The application name [CHAR_LIMIT=25] -->
-    <string name="app_name">Accion para los Animales</string>
+    <string name="app_name">Acción para los Animales</string>
 
     <!-- The prompt on the location page to have a user set their location [CHAR_LIMIT=NONE] -->
     <string name="location_prompt">Indique su ubicacicón para encontrar a sus representantes locales.</string>
@@ -25,7 +25,7 @@
     <string name="call_count_today"><xliff:g id="callCount">%1$d</xliff:g> llamadas por hacer hoy</string>
 
     <!-- Message telling a user they sill have one call to make on a particular issue today [CHAR_LIMIT=none] -->
-    <string name="call_count_today_one">1 llamada por hacer</string>
+    <string name="call_count_today_one">1 llamada por hacer hoy</string>
 
     <!-- Message telling a user they sill have no calls left on a particular issue today [CHAR_LIMIT=none] -->
     <string name="call_count_today_done">¡Bien hecho, ha hecho todas las llamadas hoy!</string>
@@ -46,22 +46,22 @@
     <string name="no_contact_areas_message">No hay llamadas para este tema.</string>
 
     <!-- Menu option to go to the About 5 Calls screen [CHAR_LIMIT=25] -->
-    <string name="menu_about">Sobre accion para los animales</string>
+    <string name="menu_about">Sobre Acción para los animales</string>
 
     <!-- Title of the About 5 Calls screen [CHAR_LIMIT=30] -->
-    <string name="about_title">Sobre Accion para los Animales</string>
+    <string name="about_title">Sobre Acción para los Animales</string>
 
     <!-- Header on the About 5 Calls screen [CHAR_LIMIT=30] -->
     <string name="about_header">HAZ QUE SE OIGA TU VOZ</string>
 
     <!-- First paragraph of About screen text [CHAR_LIMIT=NONE] -->
-    <string name="about_p1">Convierta su participación pasiva en resistencia activa. Accion para los Animales es la forma más fácil y eficaz de que los electores estadounidenses tengan un impacto político.</string>
+    <string name="about_p1">No dejes que los animales sufran en silencio. Con Action for Animals, puedes hacer llamadas rápidas que influyen en políticas que protegen a miles de millones de animales.</string>
 
     <!-- Call to action, "Spend 5 minutes, make 5 calls" [CHAR_LIMIT=] -->
-    <string name="about_p2">Tome 5 minutos, haga 5 llamadas.</string>
+    <string name="about_p2">Un minuto para ti. Una vida para los animales.</string>
 
     <!-- Body of text on the About 5 Calls screen, describing the app.   n  n is used to start the next paragraph. [CHAR_LIMIT=NONE] -->
-    <string name="about_p3">Accion para los Animales le conecta directamente con sus representantes a través de números de teléfono extraídos de sitios web públicos de la Administración, no representamos a ninguna entidad gubernamental específica, independientemente de su partido político..</string>
+    <string name="about_p3">Acción para los Animales le conecta directamente con sus representantes a través de números de teléfono extraídos de sitios web públicos de la Administración, no representamos a ninguna entidad gubernamental específica, independientemente de su partido político..</string>
 
     <!-- Button linking to a page about Why calling works [CHAR_LIMIT=30] -->
     <string name="why_calling_btn">por qué funciona llamar</string>
@@ -70,7 +70,7 @@
     <string name="about_app_prompt">Información sobre esta app</string>
 
     <!-- Prompt to click on the "Rate" button [CHAR_LIMIT=100] -->
-    <string name="rate_us_prompt">Si la aplicación Accion para los Animales te ha sido útil, te agradeceríamos que nos califíques en Play Store.</string>
+    <string name="rate_us_prompt">Si la aplicación Acción para los Animales te ha sido útil, te agradeceríamos que nos califíques en Play Store.</string>
 
     <!-- Button linking to the 5calls.org about page [CHAR_LIMIT=30] -->
     <string name="about_us_btn">sobre nosotros</string>
@@ -78,23 +78,26 @@
     <!-- Button that allows users to send 5 Calls an email [CHAR_LIMIT=30] -->
     <string name="contact_us_btn">contáctenos</string>
 
+    <!--5 Calls Ack -->
+    <string name="five_calls_ack_btn">Agradecimiento a 5 Calls</string>
+
     <!-- Button linking to the 5calls.org Play Store page to request a rating [CHAR_LIMIT=30] -->
-    <string name="rate_us_btn">Califíque a Accion para los Animales</string>
+    <string name="rate_us_btn">Califíque a Acción para los Animales</string>
 
     <!-- Text to show the user the number of calls made by everyone [CHAR_LIMIT=50] -->
     <string name="calls_to_date"><xliff:g id="callCount">%1$s</xliff:g> llamadas a la fecha</string>
 
     <!-- Text shown to the user on the splash / tutorial screen describing the 5 Calls app.   n  n is used to create new paragraphs. [CHAR_LIMIT=NONE] -->
-    <string name="about_splash">Hay una forma sencilla y directa de influir al Gobierno que se supone te representa: Llámales por teléfono.</string>
+    <string name="about_splash">No dejes que los animales sufran en silencio. Con Action for Animals, puedes hacer llamadas rápidas que influyen en políticas que protegen a miles de millones de animales.</string>
 
     <!-- Tutorial screen text that calling is effective [CHAR_LIMIT=100] -->
     <string name="about_p2_2">Llamar por teléfono es la forma más efectiva de influir a sus representantes.</string>
 
     <!-- Text shown to the user on the splash / tutorial screen describing more about the 5 Calls app.   n  n is used to create new paragraphs. [CHAR_LIMIT=NONE] -->
-    <string name="about_splash_2">Accion para los Animales te da contactos y guiones para que puedas llamar rápido y fácilmente. Usamos su ubicación para darle a sus representantes locales para que sus llamadas sean más impactantes.</string>
+    <string name="about_splash_2">Acción para los Animales te da contactos y guiones para que puedas llamar rápido y fácilmente. Usamos su ubicación para darle a sus representantes locales para que sus llamadas sean más impactantes.</string>
 
     <!-- Text shown to the user on the splash / tutorial screen letting them know about notifications and reminders [CHAR_LIMIT=NONE] -->
-    <string name="about_splash_3">La aplicación Accion para los Animales puede enviárte recordatorios varias veces a la semana para ayudarte a mantener tu participación. Puedes activar y personalizar los recordatorios en configuración.</string>
+    <string name="about_splash_3">La aplicación Acción para los Animales puede enviárte recordatorios varias veces a la semana para ayudarte a mantener tu participación. Puedes activar y personalizar los recordatorios en configuración.</string>
 
     <!-- Button shown to turn on reminders [CHAR_LIMIT=50] -->
     <string name="tutorial_reminders_btn">Activar recordatorios</string>
@@ -112,7 +115,8 @@
     <string name="get_started_btn">Empieza</string>
 
     <!-- Description of how the 5 Calls app is open-source, link to github page [CHAR_LIMIT=NONE] -->
-    <string name="open_source_info">La aplicación de 5 llamadas es de código abierto y hecha por voluntarios. Encuéntralo en <a href="https://github.com/5calls/android\">github</a>..</string>
+    <string name="open_source_info">La app Acción para los Animales es de código abierto y hecha por voluntarios. Encuéntrala en
+        <a href="https://github.com/riya-235/android">GitHub</a>.</string>
 
     <!-- Version code shown to the user in the about page [CHAR_LIMIT=NONE] -->
     <string name="version_info">Versión <xliff:g id="versionName">%1$s</xliff:g> (<xliff:g id="versionCode">%2$d</xliff:g>)</string>
@@ -139,16 +143,16 @@
     <string name="settings">Configuración</string>
 
     <!-- Setting to send usage data (i.e. Analytics) to the 5 calls team [CHAR_LIMIT=50] -->
-    <string name="setting_usage_title">Envia datos de uso de la aplicación Accion para los Animales</string>
+    <string name="setting_usage_title">Envia datos de uso de la aplicación Acción para los Animales</string>
 
     <!-- Description of setting to send usage data to the 5 calls team [CHAR_LIMIT=NONE] -->
-    <string name="settings_usage_summary">Los datos son anónimos y nos ayudan a entender cómo se utiliza la aplicación de Accion para los Animales y mejorarla.</string>
+    <string name="settings_usage_summary">Los datos son anónimos y nos ayudan a entender cómo se utiliza la aplicación de Acción para los Animales y mejorarla.</string>
 
     <!-- Menu option to update the location for the app [CHAR_LIMIT=25] -->
     <string name="menu_location">Actualizar ubicación</string>
 
     <!-- Title for issues list page, starts with the app name and specifies the user's location [CHAR_LIMIT=30] -->
-    <string name="title_main">Accion para los Animales para <xliff:g id="location">%1$s</xliff:g></string>
+    <string name="title_main">Acción para los Animales para <xliff:g id="location">%1$s</xliff:g></string>
 
     <!-- Button that will use the user's device location to set the location in the app [CHAR_LIMIT=30] -->
     <string name="btn_gps">Usar mi ubicación</string>
@@ -163,8 +167,7 @@
     <string name="stats_activity">Su impacto</string>
 
     <!-- Message that the user has no stats yet because they haven't made calls yet, shown on the impact page [CHAR_LIMIT=100] -->
-    <string name="no_calls_impact_message">¡Todavía no has hecho llamadas con la aplicación de 5 llamadas!</string>
-
+    <string name="no_calls_impact_message">¡Aún no has realizado ninguna llamada con la app Acción para los Animales!</string>
     <!-- Short sentence with the user's total call count [CHAR_LIMIT=50] -->
     <string name="your_call_count">Su impacto es <xliff:g id="callCount">%1$d</xliff:g> calls!</string>
 
@@ -229,7 +232,7 @@
     <string name="contact_done_img_description">(contactado)</string>
 
     <!-- Title for a dialog telling a user what type of contact they've made with a rep on an issue [CHAR_LIMIT=30] -->
-    <string name="contact_details_dialog_title">Ya ha comunicado estas acciones:</string>
+    <string name="contact_details_dialog_title">Ya ha comunicado estas Acciónes:</string>
 
     <!-- Link to go back to the issues list main activity from an issue [CHAR_LIMIT=20] -->
     <string name="back">regresar</string>
@@ -247,7 +250,7 @@
     <string name="settings_reminders_enable_title">Permite recordatarios</string>
 
     <!-- Summary for settings option to enable reminders [CHAR_LIMIT=NONE]-->
-    <string name="settings_reminders_enable_summary">Permite recordatarios para hacer 5 llamadas.</string>
+    <string name="settings_reminders_enable_summary">Activa los recordatorios para participar en Acción para los Animales.</string>
 
     <!-- Summary string for settings option to enable reminders, when the notification permission has been denied [CHAR_LIMIT=NONE] -->
     <string name="reminders_disabled_summary">Las notificaciones están desactivadas. Activa las notificaciones en los ajustes de tu dispositivo para permitir los recordatorios.</string>
@@ -283,7 +286,7 @@
     <string name="notification_title">Haz que se oiga tu voz</string>
 
     <!-- Text for a notification reminder to make 5 calls [CHAR_LIMIT=50]-->
-    <string name="notification_text">Dedique 5 minutos para ponerse en contacto con sus representantes.</string>
+    <string name="notification_text">Dedica 1 minuto para contactar a tus representantes.</string>
 
     <!-- Button to go to the settings activity [CHAR_LIMIT=25] -->
     <string name="go_to_settings">Ve a configuración</string>
@@ -313,13 +316,13 @@
     <string name="share_chooser_title">Compartir con…</string>
 
     <!-- Subject for an email sent from the "Your Impact" screen sharing how many calls you've made [CHAR_LIMIT=200] -->
-    <string name="share_subject">He usado Accion para los Animales para marcar una diferencia</string>
+    <string name="share_subject">He usado Acción para los Animales para marcar una diferencia</string>
 
     <!-- Content of an email or message shared from the "Your Impact" screen sharing how many calls you've made [CHAR_LIMIT=NONE] -->
-    <string name="share_content">He hecho <xliff:g id="call_count">%1$d</xliff:g> llamadas a mis representantes para dar mi opinión. Únase conmigo en 5calls.org. ¡Es fácil marcar una diferencia!</string>
+     <string name="share_content">He realizado <xliff:g id="call_count">%1$d</xliff:g> llamadas a mis representantes – únete a mí en https://actionforanimals.substack.com/</string>
 
     <!-- Subject for an email sent from an issue detail screen sharing an issue [CHAR_LIMIT=200] -->
-    <string name="issue_share_subject">Quiero avisarles de este tema que encontré en Accion para los Animales.</string>
+    <string name="issue_share_subject">Quiero avisarles de este tema que encontré en Acción para los Animales.</string>
 
     <!-- Content of an email or message shared from an issue detail screen sharing an issue [CHAR_LIMIT=NONE] -->
     <string name="issue_share_content">Acabo de llamar a mi representante sobre este tema: <xliff:g id="issue_summary">%1$s</xliff:g>. Debe hacer lo mismo: https://actionforanimals.substack.com/p/<xliff:g id="issue_id">%2$s</xliff:g></string>
@@ -477,7 +480,7 @@
     <string name="error_email_format">Email no válido</string>
 
     <!-- Section title shown after the user has successfully signed up for the newsletter. -->
-    <string name="newsletter_success_title">Suscrito al boletín informativo de Accion para los Animales</string>
+    <string name="newsletter_success_title">Suscrito al boletín informativo de Acción para los Animales</string>
 
     <!-- Section description shown after the user has successfully signed up for the newsletter. -->
     <string name="newsletter_success_description">Se ha suscrito con éxito. El próximo boletín se enviará a su correo electrónico.</string>
@@ -510,10 +513,10 @@
     <string name="done_share_prompt">Compartir este tema</string>
 
     <!-- Paragraph text describing that 5 Calls is a grassroots org, to explain why we may want donations. -->
-    <string name="done_donate_description">Accion para los Animales es una organización sin fines de lucro con apoyo popular.</string>
+    <string name="done_donate_description">Acción para los Animales es una organización sin fines de lucro con apoyo popular.</string>
 
     <!-- A prompt to donate to 5 calls, shown near the donate button. -->
-    <string name="done_donate_prompt">Ayude a mantener Accion para los Animales gratis y al día</string>
+    <string name="done_donate_prompt">Ayude a mantener Acción para los Animales gratis y al día</string>
 
     <!-- A button to go to a page that accepts donations. -->
     <string name="done_donate_button">Donar</string>

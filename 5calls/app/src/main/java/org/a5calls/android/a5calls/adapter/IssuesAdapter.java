@@ -65,11 +65,11 @@ public class IssuesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         mCallback = callback;
     }
 
-    public void setIssues(List<Issue> issues) {
-        this.mIssues = issues;  // or whatever the internal issue list is called
-        notifyDataSetChanged();
-    }
-
+    // Action For Animals: Not sure why this was added by commit af3e4f03d8cff8c9ea68c02ad54c01636eb355a2
+    // public void setIssues(List<Issue> issues) {
+    //     this.mIssues = issues;  // or whatever the internal issue list is called
+    //     notifyDataSetChanged();
+    // }
 
     /**
      * Sets the full list of available issues. Does not update the visible list unless there

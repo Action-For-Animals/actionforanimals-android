@@ -16,7 +16,6 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorButtonNormal">@color/button_color</item>
         <item name="android:alertDialogTheme">@style/AppTheme.Dialog</item>
-        <item name="android:windowBackground">@color/ic_launcher_background_back</item>
     </style>
 
     <style name="AppTheme.NoBarTheme.MainActivity" parent="AppTheme.NoBarTheme" >

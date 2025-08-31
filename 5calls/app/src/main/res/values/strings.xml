@@ -55,7 +55,7 @@
     <string name="about_header">MAKE YOUR VOICE HEARD</string>
 
     <!-- First paragraph of About screen text [CHAR_LIMIT=NONE] -->
-    <string name="about_p1">Turn your concern for animals into political power. Action for Animals makes it easy and effective for U.S. constituents to take action for animals and push for change.</string>
+    <string name="about_p1">Don’t let animals suffer in silence. With Action for Animals, you can make quick calls that influence policies protecting billions of animals.</string>
 
     <!-- Call to action, 'Spend 5 minutes, make 5 calls' [CHAR_LIMIT=] -->
     <string name="about_p2">A minute for you. A life for them.</string>
@@ -105,6 +105,9 @@
     <!-- Button linking to the 5calls.org Play Store page to request a rating [CHAR_LIMIT=30] -->
     <string name="rate_us_btn">Rate Action for Animals</string>
 
+    <!--5 Calls Ack -->
+    <string name="five_calls_ack_btn">5 Calls Acknowledgement</string>
+
     <!-- Button linking to the privacy policy [CHAR_LIMIT=30] -->
      <string name="privacy_btn">Privacy Policy</string>
 
@@ -112,7 +115,7 @@
     <string name="calls_to_date">Together we\'ve made <xliff:g id="callCount">%1$s</xliff:g> calls</string>
 
     <!-- Text shown to the user on the splash / tutorial screen describing the 5 Calls app. \n\n is used to create new paragraphs. [CHAR_LIMIT=NONE] -->
-    <string name="about_splash">There\'s one simple, powerful way to influence the government on behalf of animals: Call them.</string>
+    <string name="about_splash">Don’t let animals suffer in silence. With Action for Animals, you can make quick calls that influence policies protecting billions of animals.</string>
 
     <!-- Tutorial screen text that calling is effective [CHAR_LIMIT=100] -->
     <string name="about_p2_2">Calling is one of the most effective ways to influence your representatives on behalf of animals.</string>
@@ -417,6 +420,9 @@
     <!-- Action for a snackbar or button which brings you to the location update screen [CHAR_LIMIT=10] -->
     <string name="update">update</string>
 
+    <!-- URL for the 5 Calls Github page -->
+    <string name="five_calls_github_url" translatable="false">https://github.com/5calls</string>
+
     <!-- URL for the 5 Calls Facebook page -->
     <string name="facebook_url" translatable="false">https://www.facebook.com/groups/1554649705329105</string>
 
@@ -440,6 +446,9 @@
 
     <!-- URL for the 5 Calls Why Calling Works page [CHAR_LIMIT=NONE] -->
     <string name="why_calling_url" translatable="false">https://actionforanimals.substack.com/p/why-calling-works</string>
+
+    <!-- URL for the Privacy page [CHAR_LIMIT=NONE] -->
+    <string name="privacy_url" translatable="false">https://actionforanimals.substack.com/p/privacy</string>
 
     <!-- Email address to contact 5 Calls [CHAR_LIMIT=NONE] -->
     <string name="email_address" translatable="false">howdyxfa@gmail.com</string>

@@ -42,14 +42,14 @@ public class FiveCallsApi {
     protected static final boolean TESTING = true;
 
     //private static final String GET_ISSUES_REQUEST = "https://api.5calls.org/v1/issues";
-    private static final String GET_ISSUES_REQUEST = "https://testaction-19b48-default-rtdb.firebaseio.com/.json";
+    private static final String GET_ISSUES_REQUEST = "https://getissues-wv7gpk3bya-uc.a.run.app";
 
 
     // private static final String GET_CONTACTS_REQUEST = "https://api.5calls.org/v1/reps?location=";
-    private static final String GET_CONTACTS_REQUEST = "https://getcontacts-uabgeeameq-uc.a.run.app?location=";
+    private static final String GET_CONTACTS_REQUEST = "https://getcontacts-wv7gpk3bya-uc.a.run.app?location=";
 
     // private static final String GET_REPORT = "https://api.5calls.org/v1/report";
-    private static final String GET_REPORT = "https://reportcall-uabgeeameq-uc.a.run.app";
+    private static final String GET_REPORT = "https://reportcall-wv7gpk3bya-uc.a.run.app";
 
     // private static final String NEWSLETTER_SUBSCRIBE = "https://buttondown.com/api/emails/embed-subscribe/5calls";
     private static final String NEWSLETTER_SUBSCRIBE = "https://subscribeuser-uabgeeameq-uc.a.run.app";

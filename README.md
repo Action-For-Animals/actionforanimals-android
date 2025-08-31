@@ -1,5 +1,5 @@
 # android
-The Android App version of Strategic Action for Animals.
+The Android App version of Action for Animals.
 
 ## License
 This project is released open source under the MIT License. See [LICENSE](https://github.com/5calls/android/blob/master/LICENSE.txt) for more details.
