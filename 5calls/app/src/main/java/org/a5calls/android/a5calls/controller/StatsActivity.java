@@ -361,7 +361,7 @@ public class StatsActivity extends AppCompatActivity {
             return null;
         }
         return FileProvider.getUriForFile(this,
-                "org.a5calls.android.a5calls.file-provider", sharedImage);
+                "org.actionforanimals.app.file-provider", sharedImage);
     }
 
     private Bitmap generateGraphBitmap() {

@@ -55,7 +55,7 @@
     <string name="about_header">HAZ QUE SE OIGA TU VOZ</string>
 
     <!-- First paragraph of About screen text [CHAR_LIMIT=NONE] -->
-    <string name="about_p1">No dejes que los animales sufran en silencio. Con Action for Animals, puedes hacer llamadas rápidas que influyen en políticas que protegen a miles de millones de animales.</string>
+    <string name="about_p1">No dejes que los animales sufran en silencio. Con Action For Animals, puedes hacer llamadas rápidas que influyen en políticas que protegen a miles de millones de animales.</string>
 
     <!-- Call to action, "Spend 5 minutes, make 5 calls" [CHAR_LIMIT=] -->
     <string name="about_p2">Un minuto para ti. Una vida para los animales.</string>
@@ -88,7 +88,7 @@
     <string name="calls_to_date"><xliff:g id="callCount">%1$s</xliff:g> llamadas a la fecha</string>
 
     <!-- Text shown to the user on the splash / tutorial screen describing the 5 Calls app.   n  n is used to create new paragraphs. [CHAR_LIMIT=NONE] -->
-    <string name="about_splash">No dejes que los animales sufran en silencio. Con Action for Animals, puedes hacer llamadas rápidas que influyen en políticas que protegen a miles de millones de animales.</string>
+    <string name="about_splash">No dejes que los animales sufran en silencio. Con Action For Animals, puedes hacer llamadas rápidas que influyen en políticas que protegen a miles de millones de animales.</string>
 
     <!-- Tutorial screen text that calling is effective [CHAR_LIMIT=100] -->
     <string name="about_p2_2">Llamar por teléfono es la forma más efectiva de influir a sus representantes.</string>

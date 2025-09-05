@@ -44,7 +44,7 @@ public class FiveCallsApplication extends Application {
         return mAnalyticsManager;
     }
 
-    private static final String ONESIGNAL_APP_ID = "5fd4ca41-9f6c-4149-a312-ae3e71b35c0e";
+    private static final String ONESIGNAL_APP_ID = "c7e0d1df-299f-4ec5-91f4-a7aed0d9dd09";
 
     public FiveCallsApplication() {
         super();
