@@ -50,7 +50,27 @@ public class IssueTest {
             assertEquals(expected.name, actual.name);
             assertEquals(expected.slug, actual.slug);
             assertEquals(expected.reason, actual.reason);
-            assertEquals(expected.script, actual.script);
+            // Compare actions structure
+            if (expected.actions == null) {
+                assertNull(actual.actions);
+            } else {
+                assertNotNull(actual.actions);
+                if (expected.actions.call == null) {
+                    assertNull(actual.actions.call);
+                } else {
+                    assertNotNull(actual.actions.call);
+                    assertEquals(expected.actions.call.enabled, actual.actions.call.enabled);
+                    assertEquals(expected.actions.call.script, actual.actions.call.script);
+                }
+                if (expected.actions.email == null) {
+                    assertNull(actual.actions.email);
+                } else {
+                    assertNotNull(actual.actions.email);
+                    assertEquals(expected.actions.email.enabled, actual.actions.email.enabled);
+                    assertEquals(expected.actions.email.subject, actual.actions.email.subject);
+                    assertEquals(expected.actions.email.template, actual.actions.email.template);
+                }
+            }
             assertEquals(expected.link, actual.link);
             assertEquals(expected.linkTitle, actual.linkTitle);
             assertEquals(expected.active, actual.active);

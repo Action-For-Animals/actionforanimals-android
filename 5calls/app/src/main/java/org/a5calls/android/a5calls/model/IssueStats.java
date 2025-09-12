@@ -4,10 +4,10 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class IssueStats implements Parcelable {
-    public int calls;
+    public int total_actions;
 
     protected IssueStats(Parcel in) {
-        calls = in.readInt();
+        total_actions = in.readInt();
     }
 
     public static final Creator<IssueStats> CREATOR = new Creator<IssueStats>() {
@@ -29,6 +29,6 @@ public class IssueStats implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(calls);
+        dest.writeInt(total_actions);
     }
 }

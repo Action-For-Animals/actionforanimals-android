@@ -121,7 +121,7 @@ public class RepCallActivity extends AppCompatActivity {
         Contact c = mIssue.contacts.get(mActiveContactIndex);
         String script = ScriptReplacements.replacing(
                 this,
-                mIssue.script,
+                mIssue.actions != null && mIssue.actions.call != null ? mIssue.actions.call.script : "",
                 c,
                 getIntent().getStringExtra(KEY_LOCATION_NAME),
                 AccountManager.Instance.getUserName(this)

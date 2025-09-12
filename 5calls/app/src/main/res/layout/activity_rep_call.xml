@@ -2,7 +2,8 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/scroll_view"
-    style="@style/scrollViewStyle">
+    style="@style/scrollViewStyle"
+    android:fitsSystemWindows="true">
 
     <LinearLayout
         android:id="@+id/rep_call_root"

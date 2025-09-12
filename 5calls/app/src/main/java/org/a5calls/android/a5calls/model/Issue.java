@@ -13,7 +13,7 @@ public class Issue implements Parcelable {
     public String name;
     public String slug;
     public String reason;
-    public String script;
+    public Actions actions;
     public boolean active;
     public String link;
     public String linkTitle;
@@ -31,7 +31,7 @@ public class Issue implements Parcelable {
         name = in.readString();
         slug = in.readString();
         reason = in.readString();
-        script = in.readString();
+        actions = in.readParcelable(Actions.class.getClassLoader());
         link = in.readString();
         linkTitle = in.readString();
         active = in.readInt() != 0;
@@ -67,7 +67,7 @@ public class Issue implements Parcelable {
         dest.writeString(name);
         dest.writeString(slug);
         dest.writeString(reason);
-        dest.writeString(script);
+        dest.writeParcelable(actions, flags);
         dest.writeString(link);
         dest.writeString(linkTitle);
         dest.writeInt(active ? 1 : 0);

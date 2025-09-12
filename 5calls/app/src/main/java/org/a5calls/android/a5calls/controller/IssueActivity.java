@@ -426,7 +426,7 @@ public class IssueActivity extends AppCompatActivity {
 
         // Format call stats like a nice number with commas.
         ((TextView) findViewById(R.id.issue_call_count)).setText(
-                String.format(Locale.getDefault(), "%,d", mIssue.stats.calls));
+                String.format(Locale.getDefault(), "%,d", mIssue.stats.total_actions));
 
         findViewById(R.id.share_btn).setOnClickListener(v -> sendShare());
 
@@ -475,8 +475,8 @@ public class IssueActivity extends AppCompatActivity {
             }
             result.append("\n\n");
         }
-        if (issue.stats.calls >= MIN_CALLS_TO_SHOW_CALL_STATS) {
-            String callCount = String.format(Locale.getDefault(), "%,d", issue.stats.calls);
+        if (issue.stats.total_actions >= MIN_CALLS_TO_SHOW_CALL_STATS) {
+            String callCount = String.format(Locale.getDefault(), "%,d", issue.stats.total_actions);
             result.append(context.getResources().getString(R.string.done_issue_stats));
             result.append(" ").append(callCount).append("\n\n");
         }

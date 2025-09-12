@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_location"
     style="@style/scrollViewStyle"
+    android:fitsSystemWindows="true"
     >
 
     <LinearLayout

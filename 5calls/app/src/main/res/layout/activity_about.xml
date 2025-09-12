@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/background_color"
     android:id="@+id/activity_about"
+    android:fitsSystemWindows="true"
     >
 
     <LinearLayout style="@style/mainLinearLayout"
