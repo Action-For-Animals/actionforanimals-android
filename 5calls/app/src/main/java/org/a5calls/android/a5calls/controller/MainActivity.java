@@ -22,7 +22,9 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.util.DisplayMetrics;
 import android.util.Patterns;
@@ -31,8 +33,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+// Removed unused imports: AdapterView, ArrayAdapter (filter functionality removed)
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -66,13 +67,11 @@ public class MainActivity extends AppCompatActivity implements IssuesAdapter.Cal
     private static final int ISSUE_DETAIL_REQUEST = 1;
     public static final int NOTIFICATION_REQUEST = 2;
     public static final String EXTRA_FROM_NOTIFICATION = "extraFromNotification";
-    private static final String KEY_FILTER_ITEM_SELECTED = "filterItemSelected";
     private static final String KEY_SEARCH_TEXT = "searchText";
     private static final String KEY_SHOW_LOW_ACCURACY_WARNING = "showLowAccuracyWarning";
     private final AccountManager accountManager = AccountManager.Instance;
 
-    private ArrayAdapter<String> mFilterAdapter;
-    private String mFilterText = "";
+    // Removed filter functionality
     private String mSearchText = "";
     private IssuesAdapter mIssuesAdapter;
     private FiveCallsApi.IssuesRequestListener mIssuesRequestListener;
@@ -91,6 +90,16 @@ public class MainActivity extends AppCompatActivity implements IssuesAdapter.Cal
     private ActivityMainBinding binding;
 
     private Snackbar mSnackbar;
+
+    // Debounced search runnable
+    private final Runnable searchRunnable = new Runnable() {
+        @Override
+        public void run() {
+            if (!binding.swipeContainer.isRefreshing()) {
+                mIssuesAdapter.setFilterAndSearch(getString(R.string.all_issues_filter), mSearchText);
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -186,42 +195,41 @@ public class MainActivity extends AppCompatActivity implements IssuesAdapter.Cal
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         binding.issuesRecyclerView.setLayoutManager(layoutManager);
-        DividerItemDecoration divider = new DividerItemDecoration(this, RecyclerView.VERTICAL);
-        binding.issuesRecyclerView.addItemDecoration(divider);
+        // Removed DividerItemDecoration - using custom iOS-style separators in layout
         mIssuesAdapter = new IssuesAdapter(this, this);
         binding.issuesRecyclerView.setAdapter(mIssuesAdapter);
 
-        mFilterAdapter = new ArrayAdapter<>(this, R.layout.filter_item);
-        mFilterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mFilterAdapter.addAll(getResources().getStringArray(R.array.default_filters));
-        binding.filter.setAdapter(mFilterAdapter);
+        // Setup always-visible search functionality
         if (savedInstanceState != null) {
-            mFilterText = savedInstanceState.getString(KEY_FILTER_ITEM_SELECTED);
             mSearchText = savedInstanceState.getString(KEY_SEARCH_TEXT);
+            if (mSearchText == null) mSearchText = "";
             mShowLowAccuracyWarning = savedInstanceState.getBoolean(KEY_SHOW_LOW_ACCURACY_WARNING);
-            if (TextUtils.isEmpty(mSearchText)) {
-                binding.searchBar.setVisibility(View.GONE);
-                binding.filter.setVisibility(VISIBLE);
-            } else {
-                binding.searchBar.setVisibility(VISIBLE);
-                binding.filter.setVisibility(View.GONE);
-                binding.searchText.setText(mSearchText);
+            if (!TextUtils.isEmpty(mSearchText)) {
+                binding.searchInput.setText(mSearchText);
             }
         } else {
-            // Safe to use index as the top two filters are hard-coded strings.
-            mFilterText = mFilterAdapter.getItem(0);
+            mSearchText = ""; // Initialize to empty string
         }
-        binding.searchText.setOnClickListener(new View.OnClickListener() {
+        
+        // Setup real-time search as user types
+        binding.searchInput.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View view) {
-                launchSearchDialog();
-            }
-        });
-        binding.clearSearchButton.setOnClickListener(new View.OnClickListener() {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
             @Override
-            public void onClick(View view) {
-                onIssueSearchCleared();
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String searchText = s.toString().trim();
+                if (!TextUtils.equals(mSearchText, searchText)) {
+                    mSearchText = searchText;
+                    updateOnBackPressedCallbackEnabled();
+                    // Debounce search - only search after user stops typing for 300ms
+                    binding.searchInput.removeCallbacks(searchRunnable);
+                    binding.searchInput.postDelayed(searchRunnable, 300);
+                }
             }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
         });
 
         registerOnBackPressedCallback();
@@ -270,12 +278,11 @@ public class MainActivity extends AppCompatActivity implements IssuesAdapter.Cal
                 getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
                 int supportActionBarHeight =
                         getSupportActionBar() != null ? getSupportActionBar().getHeight() : 0;
-                int searchHeight = binding.searchBar.getHeight();
-                int filterHeight = binding.filter.getHeight();
+                int searchHeight = binding.searchContainer.getHeight();
                 binding.swipeContainer.getLayoutParams().height = (int)
                         (getResources().getConfiguration().screenHeightDp * displayMetrics.density -
-                                searchHeight - filterHeight - supportActionBarHeight);
-                binding.filter.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                                searchHeight - supportActionBarHeight);
+                binding.searchContainer.getViewTreeObserver().removeOnGlobalLayoutListener(this);
             }
         });
 
@@ -304,7 +311,6 @@ public class MainActivity extends AppCompatActivity implements IssuesAdapter.Cal
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
-        outState.putString(KEY_FILTER_ITEM_SELECTED, mFilterText);
         outState.putString(KEY_SEARCH_TEXT, mSearchText);
         outState.putBoolean(KEY_SHOW_LOW_ACCURACY_WARNING, mShowLowAccuracyWarning);
         super.onSaveInstanceState(outState);
@@ -332,7 +338,8 @@ public class MainActivity extends AppCompatActivity implements IssuesAdapter.Cal
             });
             return true;
         } else if (item.getItemId() == R.id.menu_search) {
-            launchSearchDialog();
+            // Focus on the search input instead of launching dialog
+            binding.searchInput.requestFocus();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -425,9 +432,8 @@ public class MainActivity extends AppCompatActivity implements IssuesAdapter.Cal
 
             @Override
             public void onIssuesReceived(List<Issue> issues) {
-                populateFilterAdapterIfNeeded(issues);
                 mIssuesAdapter.setAllIssues(issues, IssuesAdapter.NO_ERROR);
-                mIssuesAdapter.setFilterAndSearch(mFilterText, mSearchText);
+                mIssuesAdapter.setFilterAndSearch(getString(R.string.all_issues_filter), mSearchText); // Show all issues by default
                 binding.swipeContainer.setRefreshing(false);
             }
         };
@@ -535,69 +541,22 @@ public class MainActivity extends AppCompatActivity implements IssuesAdapter.Cal
         mOnBackPressedCallback = new OnBackPressedCallback(/* enabled= */ false) {
             @Override
             public void handleOnBackPressed() {
-                // Clear the filter, if there was one.
-                binding.filter.setSelection(0);
-                // Clear the search, if there was one.
-                onIssueSearchSet("");
-                // The calls above will disable this callback, so no need
-                // to do it here.
+                // Clear the search field
+                binding.searchInput.setText("");
+                // This will trigger the TextWatcher and clear search
             }
         };
         updateOnBackPressedCallbackEnabled();
         getOnBackPressedDispatcher().addCallback(mOnBackPressedCallback);
     }
 
-    // Should be called whenever filter or search state changes.
+    // Should be called whenever search state changes.
     private void updateOnBackPressedCallbackEnabled() {
-        boolean isFiltering = !Objects.equals(mFilterText, mFilterAdapter.getItem(0));
         boolean isSearching = !TextUtils.isEmpty(mSearchText);
-        mOnBackPressedCallback.setEnabled(isFiltering || isSearching);
+        mOnBackPressedCallback.setEnabled(isSearching);
     }
 
-    private void populateFilterAdapterIfNeeded(List<Issue> issues) {
-        if (mFilterAdapter.getCount() > 2) {
-            // Already populated. Don't try again.
-            // This assumes that the categories won't change much during the course of a session.
-            return;
-        }
-        List<String> topics = new ArrayList<>();
-        for (Issue issue : issues) {
-            if (issue.categories == null) {
-                continue;
-            }
-            for (Category category : issue.categories) {
-                if (!topics.contains(category.name)) {
-                    topics.add(category.name);
-                }
-            }
-        }
-        Collections.sort(topics);
-        mFilterAdapter.addAll(topics);
-        binding.filter.setSelection(mFilterAdapter.getPosition(mFilterText));
-        // Set this listener after manually setting the selection so it isn't fired right away.
-        binding.filter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String newFilter = mFilterAdapter.getItem(i);
-                if (TextUtils.equals(newFilter, mFilterText)) {
-                    // Already set!
-                    return;
-                }
-                mFilterText = newFilter;
-                updateOnBackPressedCallbackEnabled();
-                if (binding.swipeContainer.isRefreshing()) {
-                    // Already loading issues!
-                    return;
-                }
-                mIssuesAdapter.setFilterAndSearch(mFilterText, mSearchText);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-    }
+    // Removed populateFilterAdapterIfNeeded method - no longer using filters
 
     private void loadStats() {
         int callCount = AppSingleton.getInstance(getApplicationContext())
@@ -646,36 +605,15 @@ public class MainActivity extends AppCompatActivity implements IssuesAdapter.Cal
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    // Method for search dialog compatibility (though dialog is rarely used now)
     public void onIssueSearchSet(String searchText) {
-        if (TextUtils.isEmpty(searchText.trim())) {
-            onIssueSearchCleared();
-            return;
-        }
-        binding.filter.setVisibility(View.GONE);
-        binding.searchBar.setVisibility(VISIBLE);
-        setSearchText(searchText);
-        updateOnBackPressedCallbackEnabled();
+        binding.searchInput.setText(searchText);
+        // TextWatcher will handle the actual search
     }
 
     public void onIssueSearchCleared() {
-        binding.filter.setVisibility(VISIBLE);
-        binding.searchBar.setVisibility(View.GONE);
-        setSearchText("");
-        updateOnBackPressedCallbackEnabled();
-    }
-
-    private void setSearchText(String searchText) {
-        binding.searchText.setText(searchText);
-        if (TextUtils.equals(mSearchText, searchText)) {
-            // Already set, no need to do work.
-            return;
-        }
-        mSearchText = searchText;
-        if (binding.swipeContainer.isRefreshing()) {
-            // Already loading issues!
-            return;
-        }
-        mIssuesAdapter.setFilterAndSearch(mFilterText, mSearchText);
+        binding.searchInput.setText("");
+        // TextWatcher will handle clearing the search
     }
 
     private void hideSnackbars() {

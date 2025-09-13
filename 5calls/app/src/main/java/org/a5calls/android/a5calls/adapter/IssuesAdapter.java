@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -225,7 +226,7 @@ public class IssuesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     R.layout.empty_issues_search_view, parent, false);
             return new EmptySearchViewHolder(empty);
         } else {
-            RelativeLayout v = (RelativeLayout) LayoutInflater.from(parent.getContext())
+            View v = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.issue_view, parent, false);
             return new IssueViewHolder(v);
         }
@@ -279,7 +280,15 @@ public class IssuesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     }
                 }
             }
-            displayPreviousCallStats(issue, vh);
+            
+            // Create circular avatars and action count (iOS-style)
+            setupContactAvatars(issue, vh);
+            setupActionCount(issue, vh);
+            
+            // Hide old call stats - we're using the new iOS-style action count
+            vh.numCalls.setVisibility(View.GONE);
+            vh.previousCallStats.setVisibility(View.GONE);
+            // displayPreviousCallStats(issue, vh); // Disabled - using new iOS-style display
         } else if (type == VIEW_TYPE_EMPTY_REQUEST) {
             EmptyRequestViewHolder vh = (EmptyRequestViewHolder) holder;
             vh.refreshButton.setOnClickListener(new View.OnClickListener() {
@@ -394,16 +403,154 @@ public class IssuesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
     }
 
+    private void setupContactAvatars(Issue issue, IssueViewHolder vh) {
+        vh.avatarsContainer.removeAllViews();
+        
+        if (issue.contacts == null || issue.contacts.isEmpty()) {
+            vh.avatarsContainer.setVisibility(View.GONE);
+            return;
+        }
+        
+        vh.avatarsContainer.setVisibility(View.VISIBLE);
+        
+        // Show up to 3 contacts with overlapping avatars
+        int maxAvatars = Math.min(3, issue.contacts.size());
+        int avatarSize = 32; // dp
+        int overlapOffset = 8; // dp
+        
+        for (int i = 0; i < maxAvatars; i++) {
+            Contact contact = issue.contacts.get(i);
+            View avatarView = LayoutInflater.from(mActivity).inflate(R.layout.contact_avatar, vh.avatarsContainer, false);
+            
+            ImageView avatarImage = avatarView.findViewById(R.id.avatar_image);
+            TextView initials = avatarView.findViewById(R.id.avatar_initials);
+            ImageView checkmarkOverlay = avatarView.findViewById(R.id.checkmark_overlay);
+            
+            // Position avatars with overlap (iOS-style)
+            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+                (int) (avatarSize * mActivity.getResources().getDisplayMetrics().density),
+                (int) (avatarSize * mActivity.getResources().getDisplayMetrics().density)
+            );
+            params.leftMargin = (int) (i * (avatarSize - overlapOffset) * mActivity.getResources().getDisplayMetrics().density);
+            avatarView.setLayoutParams(params);
+            
+            // Set z-order so later avatars appear on top
+            avatarView.setTranslationZ(maxAvatars - i);
+            
+            // Check if user has called this representative today
+            DatabaseHelper dbHelper = AppSingleton.getInstance(mActivity).getDatabaseHelper();
+            boolean hasCalledToday = dbHelper.hasCalledToday(issue.id, contact.id);
+            
+            if (hasCalledToday) {
+                // Show green checkmark instead of photo
+                avatarImage.setVisibility(View.GONE);
+                initials.setVisibility(View.GONE);
+                checkmarkOverlay.setVisibility(View.VISIBLE);
+            } else {
+                // Show normal avatar (photo or initials)
+                checkmarkOverlay.setVisibility(View.GONE);
+                avatarImage.setVisibility(View.VISIBLE);
+                
+                // Load representative photo using Glide
+                if (contact.photoURL != null && !TextUtils.isEmpty(contact.photoURL.toString())) {
+                    // Load actual representative photo
+                    com.bumptech.glide.Glide.with(mActivity)
+                        .load(contact.photoURL)
+                        .circleCrop()
+                        .placeholder(generateAvatarColor(contact.name))
+                        .error(generateAvatarColor(contact.name))
+                        .into(avatarImage);
+                } else {
+                    // Fallback to colored background with initials
+                    String contactInitials = getContactInitials(contact.name);
+                    int avatarColor = generateAvatarColor(contact.name);
+                    
+                    initials.setText(contactInitials);
+                    initials.setVisibility(View.VISIBLE);
+                    avatarImage.setColorFilter(avatarColor, PorterDuff.Mode.SRC_IN);
+                }
+            }
+            
+            vh.avatarsContainer.addView(avatarView);
+        }
+        
+        // Update container width to fit all avatars
+        int totalWidth = (int) ((maxAvatars * (avatarSize - overlapOffset) + overlapOffset) * mActivity.getResources().getDisplayMetrics().density);
+        ViewGroup.LayoutParams containerParams = vh.avatarsContainer.getLayoutParams();
+        containerParams.width = totalWidth;
+        vh.avatarsContainer.setLayoutParams(containerParams);
+    }
+    
+    private void setupActionCount(Issue issue, IssueViewHolder vh) {
+        // Use the total campaign actions from issue stats
+        int totalActions = 0;
+        if (issue.stats != null) {
+            totalActions = issue.stats.total_actions;
+        }
+        
+        String actionText;
+        if (totalActions == 0) {
+            actionText = "• No actions taken yet";
+        } else if (totalActions >= 1000) {
+            double thousands = totalActions / 1000.0;
+            actionText = String.format("• %.1fK actions taken", thousands);
+        } else {
+            actionText = String.format("• %d actions taken", totalActions);
+        }
+        
+        vh.actionsTaken.setText(actionText);
+    }
+    
+    private String getContactInitials(String name) {
+        if (TextUtils.isEmpty(name)) return "?";
+        
+        String[] parts = name.trim().split("\\s+");
+        if (parts.length == 1) {
+            return parts[0].substring(0, Math.min(2, parts[0].length())).toUpperCase();
+        } else {
+            String initials = "";
+            if (parts.length >= 1 && !parts[0].isEmpty()) {
+                initials += parts[0].charAt(0);
+            }
+            if (parts.length >= 2 && !parts[1].isEmpty()) {
+                initials += parts[1].charAt(0);
+            }
+            return initials.toUpperCase();
+        }
+    }
+    
+    private int generateAvatarColor(String name) {
+        // Generate a consistent color based on the contact name
+        int[] colors = {
+            0xFF3498DB, // Blue
+            0xFF9B59B6, // Purple  
+            0xFFE91E63, // Pink
+            0xFF4CAF50, // Green
+            0xFFFF9800, // Orange
+            0xFFF44336, // Red
+            0xFF607D8B, // Blue Grey
+            0xFF795548  // Brown
+        };
+        
+        int hash = name.hashCode();
+        int index = Math.abs(hash) % colors.length;
+        return colors[index];
+    }
+
     private static class IssueViewHolder extends RecyclerView.ViewHolder {
     public TextView name;
     public TextView numCalls;
     public TextView previousCallStats;
+    public FrameLayout avatarsContainer;
+    public TextView actionsTaken;
 
     public IssueViewHolder(View itemView) {
         super(itemView);
         name = (TextView) itemView.findViewById(R.id.issue_name);
         numCalls = (TextView) itemView.findViewById(R.id.issue_call_count);
         previousCallStats = (TextView) itemView.findViewById(R.id.previous_call_stats);
+        avatarsContainer = (FrameLayout) itemView.findViewById(R.id.avatars_container);
+        actionsTaken = (TextView) itemView.findViewById(R.id.actions_taken);
     }
 }
 

@@ -17,4 +17,17 @@
     <color name="unavailable_color">@color/colorPrimaryDark</color>
     <color name="graph_legend_background_color">#9EEE</color>
     <color name="navigation_view_background_color">#EEE</color>
+    
+    <!-- iOS-inspired modern colors for enhanced UI -->
+    <color name="surface_card">#FFFFFF</color>
+    <color name="surface_elevated">#F5F5F5</color>
+    <color name="badge_call_bg">#FFF3E6</color>
+    <color name="badge_call_text">#FF8C00</color>
+    <color name="badge_email_bg">#E6F7F7</color>
+    <color name="badge_email_text">#008B8B</color>
+    <color name="text_primary_modern">#1D1D1F</color>
+    <color name="text_secondary_modern">#6C757D</color>
+    <color name="card_shadow">#1A000000</color>
+    <color name="completion_checkmark">#28A745</color>
+    <color name="avatar_background">#E9ECEF</color>
 </resources>
