@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Selected state - blue background with white text -->
+    <item android:state_selected="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#007AFF" />
+            <corners android:radius="50dp" />
+        </shape>
+    </item>
+    <!-- Default state - light gray background -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#F2F2F7" />
+            <corners android:radius="50dp" />
+        </shape>
+    </item>
+</selector>

@@ -35,6 +35,11 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 // Removed unused imports: AdapterView, ArrayAdapter (filter functionality removed)
 import android.widget.TextView;
+import android.widget.LinearLayout;
+import android.widget.Button;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -73,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements IssuesAdapter.Cal
 
     // Removed filter functionality
     private String mSearchText = "";
+    private Set<String> mSelectedCategories = new HashSet<>(); // Multi-select categories
     private IssuesAdapter mIssuesAdapter;
     private FiveCallsApi.IssuesRequestListener mIssuesRequestListener;
     private FiveCallsApi.ContactsRequestListener mContactsRequestListener;
@@ -96,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements IssuesAdapter.Cal
         @Override
         public void run() {
             if (!binding.swipeContainer.isRefreshing()) {
-                mIssuesAdapter.setFilterAndSearch(getString(R.string.all_issues_filter), mSearchText);
+                applyFilters();
             }
         }
     };
@@ -231,6 +237,9 @@ public class MainActivity extends AppCompatActivity implements IssuesAdapter.Cal
             @Override
             public void afterTextChanged(Editable s) {}
         });
+        
+        // Setup category filter chips
+        setupCategoryFilters();
 
         registerOnBackPressedCallback();
 
@@ -654,5 +663,104 @@ public class MainActivity extends AppCompatActivity implements IssuesAdapter.Cal
                 mSnackbar = null;
             }
         });
+    }
+
+    private void setupCategoryFilters() {
+        LinearLayout categoryContainer = binding.categoryChipsContainer;
+        categoryContainer.removeAllViews(); // Clear any existing chips
+        
+        // Initialize with no categories selected (show all by default)
+        mSelectedCategories.clear();
+        
+        // Add "All" chip (always first) - selected when no categories are chosen
+        addCategoryChip("All", true, false); // not last
+        
+        // Add category chips for the 3 main categories
+        String[] categories = {"Farmed", "Wildlife", "Companion"};
+        for (int i = 0; i < categories.length; i++) {
+            boolean isLast = (i == categories.length - 1);
+            addCategoryChip(categories[i], false, isLast);
+        }
+    }
+    
+    private void addCategoryChip(String categoryName, boolean isSelected, boolean isLast) {
+        Button chip = new Button(this);
+        chip.setText(categoryName);
+        chip.setBackground(getDrawable(R.drawable.category_chip_background));
+        chip.setTextColor(getColorStateList(R.color.category_chip_text_color));
+        chip.setSelected(isSelected);
+        chip.setAllCaps(false);
+        chip.setTextSize(14);
+        chip.setTypeface(chip.getTypeface(), android.graphics.Typeface.NORMAL);
+        
+        // Set padding and margins for iOS-style appearance (more horizontal padding)
+        chip.setPadding(32, 16, 32, 16);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        // Don't add end margin to the last chip
+        if (!isLast) {
+            params.setMarginEnd(12);
+        }
+        chip.setLayoutParams(params);
+        
+        // Handle chip selection
+        chip.setOnClickListener(v -> {
+            selectCategoryChip(categoryName);
+        });
+        
+        binding.categoryChipsContainer.addView(chip);
+    }
+    
+    private void selectCategoryChip(String categoryName) {
+        if (categoryName.equals("All")) {
+            // "All" button - clear all category selections
+            mSelectedCategories.clear();
+        } else {
+            // Category button - toggle selection
+            if (mSelectedCategories.contains(categoryName)) {
+                mSelectedCategories.remove(categoryName);
+            } else {
+                mSelectedCategories.add(categoryName);
+            }
+        }
+        
+        // Update chip selection states
+        updateChipSelectionStates();
+        
+        // Apply the new filter
+        applyFilters();
+    }
+    
+    private void updateChipSelectionStates() {
+        LinearLayout container = binding.categoryChipsContainer;
+        for (int i = 0; i < container.getChildCount(); i++) {
+            Button chip = (Button) container.getChildAt(i);
+            String chipText = chip.getText().toString();
+            
+            if (chipText.equals("All")) {
+                // "All" is selected when no specific categories are chosen
+                chip.setSelected(mSelectedCategories.isEmpty());
+            } else {
+                // Category chips are selected based on the set
+                chip.setSelected(mSelectedCategories.contains(chipText));
+            }
+        }
+    }
+    
+    private void applyFilters() {
+        if (mIssuesAdapter != null) {
+            // Pass the selected categories set to the adapter
+            if (mSelectedCategories.isEmpty()) {
+                // No categories selected - show all issues
+                mIssuesAdapter.setFilterAndSearchWithCategories(
+                    getString(R.string.all_issues_filter), mSearchText, mSelectedCategories);
+            } else {
+                // Categories selected - filter by them
+                mIssuesAdapter.setFilterAndSearchWithCategories(
+                    "", mSearchText, mSelectedCategories);
+            }
+        }
     }
 }

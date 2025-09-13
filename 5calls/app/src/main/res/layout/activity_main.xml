@@ -127,6 +127,32 @@
 
                 </LinearLayout>
 
+                <!-- iOS-style horizontal category filter bar -->
+                <HorizontalScrollView
+                    android:id="@+id/category_filter_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/search_container"
+                    android:scrollbars="none"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:clipToPadding="false"
+                    android:background="@color/background_color">
+
+                    <LinearLayout
+                        android:id="@+id/category_chips_container"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <!-- Category filter chips will be added programmatically -->
+
+                    </LinearLayout>
+
+                </HorizontalScrollView>
+
                 <!-- The size will be set programmatically to match the window size, which makes
                      the view fill the screen properly. -->
                 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -134,7 +160,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="800dp"
                     android:layout_alignParentBottom="true"
-                    android:layout_below="@id/search_container"
+                    android:layout_below="@id/category_filter_container"
                     >
 
                     <androidx.recyclerview.widget.RecyclerView

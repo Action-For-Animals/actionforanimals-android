@@ -22,6 +22,7 @@ import org.a5calls.android.a5calls.model.Issue;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import androidx.annotation.NonNull;
@@ -116,26 +117,73 @@ public class IssuesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             // filter or search.
             mErrorType = NO_ERROR;
         }
+        
+        // Start with all issues or filter by category first
+        List<Issue> filteredIssues;
+        if (TextUtils.equals(filterText,
+                mActivity.getResources().getString(R.string.all_issues_filter))) {
+            // Include everything
+            filteredIssues = mAllIssues;
+        } else if (TextUtils.equals(filterText,
+                mActivity.getResources().getString(R.string.top_issues_filter))) {
+            filteredIssues = filterActiveIssues();
+        } else {
+            // Filter by the category string.
+            filteredIssues = filterIssuesByCategory(filterText);
+        }
+        
+        // Then apply search text filter if needed
         if (!TextUtils.isEmpty(searchText)) {
-            mIssues = filterIssuesBySearchText(searchText, mAllIssues);
+            mIssues = filterIssuesBySearchText(searchText, filteredIssues);
             // If there's no other error, show a search error.
             if (mIssues.isEmpty() && mErrorType == NO_ERROR) {
                 mErrorType = ERROR_SEARCH_NO_MATCH;
             }
         } else {
-            // Search text is empty.
+            // No search text, use category-filtered results
+            mIssues = (ArrayList<Issue>) filteredIssues;
+        }
+        
+        notifyDataSetChanged();
+    }
+
+    public void setFilterAndSearchWithCategories(String filterText, String searchText, Set<String> selectedCategories) {
+        if (mErrorType == ERROR_SEARCH_NO_MATCH) {
+            // If we previously had a search error, reset it: this is a new
+            // filter or search.
+            mErrorType = NO_ERROR;
+        }
+        
+        // Start with all issues or filter by category first
+        List<Issue> filteredIssues;
+        if (selectedCategories.isEmpty()) {
+            // No categories selected - show all or apply other filters
             if (TextUtils.equals(filterText,
                     mActivity.getResources().getString(R.string.all_issues_filter))) {
-                // Include everything
-                mIssues = mAllIssues;
+                filteredIssues = mAllIssues;
             } else if (TextUtils.equals(filterText,
                     mActivity.getResources().getString(R.string.top_issues_filter))) {
-                mIssues = filterActiveIssues();
+                filteredIssues = filterActiveIssues();
             } else {
-                // Filter by the category string.
-                mIssues = filterIssuesByCategory(filterText);
+                filteredIssues = mAllIssues;
             }
+        } else {
+            // Filter by selected categories (multi-select)
+            filteredIssues = filterIssuesByMultipleCategories(selectedCategories);
         }
+        
+        // Then apply search text filter if needed
+        if (!TextUtils.isEmpty(searchText)) {
+            mIssues = filterIssuesBySearchText(searchText, filteredIssues);
+            // If there's no other error, show a search error.
+            if (mIssues.isEmpty() && mErrorType == NO_ERROR) {
+                mErrorType = ERROR_SEARCH_NO_MATCH;
+            }
+        } else {
+            // No search text, use category-filtered results
+            mIssues = (ArrayList<Issue>) filteredIssues;
+        }
+        
         notifyDataSetChanged();
     }
 
@@ -184,16 +232,62 @@ public class IssuesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         return tempIssues;
     }
 
-    private ArrayList<Issue> filterIssuesByCategory(String activeCategory) {
+    private ArrayList<Issue> filterIssuesByMultipleCategories(Set<String> selectedCategories) {
         ArrayList<Issue> tempIssues = new ArrayList<>();
         for (Issue issue : mAllIssues) {
-            for (Category category : issue.categories) {
-                if (TextUtils.equals(activeCategory, category.name)) {
+            // Check if issue matches any of the selected categories
+            for (String category : selectedCategories) {
+                if (issueMatchesCategory(issue, category)) {
                     tempIssues.add(issue);
+                    break; // Don't add the same issue multiple times
                 }
             }
         }
         return tempIssues;
+    }
+
+    private ArrayList<Issue> filterIssuesByCategory(String activeCategory) {
+        ArrayList<Issue> tempIssues = new ArrayList<>();
+        for (Issue issue : mAllIssues) {
+            if (issueMatchesCategory(issue, activeCategory)) {
+                tempIssues.add(issue);
+            }
+        }
+        return tempIssues;
+    }
+    
+    private boolean issueMatchesCategory(Issue issue, String filterCategory) {
+        for (Category category : issue.categories) {
+            String categoryName = category.name.toLowerCase();
+            String filter = filterCategory.toLowerCase();
+            
+            // Map filter names to actual category names (like iOS CategoryHelper)
+            switch (filter) {
+                case "wildlife":
+                    if (categoryName.contains("wildlife")) return true;
+                    break;
+                case "testing":
+                    if (categoryName.contains("testing") || categoryName.contains("animal testing")) return true;
+                    break;
+                case "companion":
+                    if (categoryName.contains("companion") || categoryName.contains("companion animals")) return true;
+                    break;
+                case "entertainment":
+                    if (categoryName.contains("entertainment")) return true;
+                    break;
+                case "climate":
+                    if (categoryName.contains("climate")) return true;
+                    break;
+                case "farmed":
+                    if (categoryName.contains("farmed") || categoryName.contains("farm")) return true;
+                    break;
+                default:
+                    // Fallback to exact match for other categories
+                    if (TextUtils.equals(filterCategory, category.name)) return true;
+                    break;
+            }
+        }
+        return false;
     }
 
     public void updateIssue(Issue issue) {
@@ -280,6 +374,9 @@ public class IssuesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     }
                 }
             }
+            
+            // Setup category icon and completion status
+            setupCategoryIcon(issue, vh);
             
             // Create circular avatars and action count (iOS-style)
             setupContactAvatars(issue, vh);
@@ -401,6 +498,90 @@ public class IssuesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                         mActivity.getResources().getString(R.string.call_count_today), callsLeft));
             }
         }
+    }
+
+    private void setupCategoryIcon(Issue issue, IssueViewHolder vh) {
+        // Get the primary category for the issue
+        String categoryName = getPrimaryCategoryName(issue);
+        
+        // Set the category icon (remove color filter to show original icon)
+        int iconResource = getCategoryIconResource(categoryName);
+        vh.categoryIcon.setImageResource(iconResource);
+        
+        // Check if all contacts have been called (campaign completed)
+        boolean isCompleted = isCampaignCompleted(issue);
+        if (isCompleted) {
+            vh.categoryCheckmark.setVisibility(View.VISIBLE);
+        } else {
+            vh.categoryCheckmark.setVisibility(View.GONE);
+        }
+    }
+    
+    private String getPrimaryCategoryName(Issue issue) {
+        if (issue.categories != null && issue.categories.length > 0) {
+            return issue.categories[0].name.toLowerCase();
+        }
+        return "generic";
+    }
+    
+    private int getCategoryIconResource(String categoryName) {
+        // Map category names to drawable resources (using underscores for Android)
+        switch (categoryName.toLowerCase()) {
+            case "wildlife":
+                return R.drawable.category_wildlife;
+            case "animal testing":
+            case "testing":
+                return R.drawable.category_testing;
+            case "companion animals":
+            case "companion":
+                return R.drawable.category_companion;
+            case "entertainment":
+                return R.drawable.category_entertainment;
+            case "climate":
+                return R.drawable.category_climate;
+            case "farmed animals":
+            case "farmed":
+                return R.drawable.category_farmed;
+            default:
+                return R.drawable.category_generic;
+        }
+    }
+    
+    private int getCategoryColor(String categoryName) {
+        // Generate colors for different categories
+        switch (categoryName.toLowerCase()) {
+            case "wildlife":
+                return 0xFF4CAF50; // Green
+            case "animal testing":
+            case "testing":
+                return 0xFF9C27B0; // Purple
+            case "companion animals":
+            case "companion":
+                return 0xFFFF9800; // Orange
+            case "entertainment":
+                return 0xFFE91E63; // Pink
+            case "climate":
+                return 0xFF2196F3; // Blue
+            case "farmed animals":
+            case "farmed":
+                return 0xFF795548; // Brown
+            default:
+                return 0xFF607D8B; // Blue Grey
+        }
+    }
+    
+    private boolean isCampaignCompleted(Issue issue) {
+        if (issue.contacts == null || issue.contacts.isEmpty()) {
+            return false;
+        }
+        
+        DatabaseHelper dbHelper = AppSingleton.getInstance(mActivity).getDatabaseHelper();
+        for (Contact contact : issue.contacts) {
+            if (!dbHelper.hasCalledToday(issue.id, contact.id)) {
+                return false; // At least one contact hasn't been called
+            }
+        }
+        return true; // All contacts have been called
     }
 
     private void setupContactAvatars(Issue issue, IssueViewHolder vh) {
@@ -543,6 +724,8 @@ public class IssuesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public TextView previousCallStats;
     public FrameLayout avatarsContainer;
     public TextView actionsTaken;
+    public ImageView categoryIcon;
+    public ImageView categoryCheckmark;
 
     public IssueViewHolder(View itemView) {
         super(itemView);
@@ -551,6 +734,8 @@ public class IssuesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         previousCallStats = (TextView) itemView.findViewById(R.id.previous_call_stats);
         avatarsContainer = (FrameLayout) itemView.findViewById(R.id.avatars_container);
         actionsTaken = (TextView) itemView.findViewById(R.id.actions_taken);
+        categoryIcon = (ImageView) itemView.findViewById(R.id.category_icon);
+        categoryCheckmark = (ImageView) itemView.findViewById(R.id.category_checkmark);
     }
 }
 
