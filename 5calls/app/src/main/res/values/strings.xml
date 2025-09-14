@@ -3,6 +3,11 @@
     <!-- The application name [CHAR_LIMIT=25] -->
     <string name="app_name">Action For Animals</string>
 
+    <!-- Welcome screen content -->
+    <string name="welcome_tagline">Turn your care for animals into meaningful action.</string>
+    <string name="welcome_location_title">Set Your Location to Get Started</string>
+    <string name="welcome_location_description">We need your location to find your representatives and show relevant campaigns.</string>
+    <string name="set_location">Set Location</string>
 
     <!-- The button for submitting your address or zip code as location [CHAR_LIMIT=30] -->
     <string name="submit">submit</string>

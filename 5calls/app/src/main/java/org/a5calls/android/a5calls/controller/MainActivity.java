@@ -123,9 +123,9 @@ public class MainActivity extends AppCompatActivity implements IssuesAdapter.Cal
             mAuth = null;
         }
 
-        // See if we've had this user before. If not, start them at tutorial type page.
+        // See if we've had this user before. If not, start them at welcome page.
         if (!accountManager.isTutorialSeen(this)) {
-            Intent intent = new Intent(this, TutorialActivity.class);
+            Intent intent = new Intent(this, WelcomeActivity.class);
             startActivity(intent);
             finish();
             return;

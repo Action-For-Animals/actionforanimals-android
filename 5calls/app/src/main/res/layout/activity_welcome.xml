@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background_color"
+    android:padding="32dp">
+
+    <!-- Top spacer -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- Logo section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginBottom="24dp">
+
+        <!-- Logo image -->
+        <ImageView
+            android:id="@+id/welcome_logo"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/afa_logotype"
+            android:contentDescription="Action for Animals Logo" />
+
+        <!-- Tagline -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/welcome_tagline"
+            android:textSize="22sp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/text_secondary_modern"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:lineSpacingExtra="2dp" />
+
+    </LinearLayout>
+
+    <!-- Second spacer (larger) -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2" />
+
+    <!-- Location setup section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <!-- Location setup title -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/welcome_location_title"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/text_primary_modern"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Location setup description -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/welcome_location_description"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/text_secondary_modern"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:layout_marginBottom="20dp"
+            android:lineSpacingExtra="2dp" />
+
+        <!-- Set Location button -->
+        <Button
+            android:id="@+id/set_location_button"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="@string/set_location"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@android:color/white"
+            android:background="@drawable/primary_button_background"
+            android:drawableStart="@drawable/ic_location_on"
+            android:drawablePadding="8dp"
+            android:gravity="center"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
+
+    <!-- Bottom spacer -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+</LinearLayout>
