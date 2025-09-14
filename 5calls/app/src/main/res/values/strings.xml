@@ -3,8 +3,6 @@
     <!-- The application name [CHAR_LIMIT=25] -->
     <string name="app_name">Action For Animals</string>
 
-    <!-- The prompt on the location page to have a user set their location [CHAR_LIMIT=NONE] -->
-    <string name="location_prompt">Set your location to find your local representatives.</string>
 
     <!-- The button for submitting your address or zip code as location [CHAR_LIMIT=30] -->
     <string name="submit">submit</string>
@@ -176,8 +174,6 @@
     <!-- Description of setting to send usage data to the 5 calls team [CHAR_LIMIT=NONE] -->
     <string name="settings_usage_summary">Data is anonymous and helps us understand how the Action For Animals app is used and make improvements.</string>
 
-    <!-- Menu option to update the location for the app [CHAR_LIMIT=25] -->
-    <string name="menu_location">Update location</string>
 
     <!-- Title for issues list page, starts with the app name and specifies the user's location [CHAR_LIMIT=30] -->
     <string name="title_main">Action For Animals for <xliff:g id="location">%1$s</xliff:g></string>
@@ -185,12 +181,7 @@
     <!-- Button that will use the user's device location to set the location in the app [CHAR_LIMIT=30] -->
     <string name="btn_gps">Use my location</string>
 
-    <!-- Inform the user their location is private -->
-    <string name="location_private">Your location stays private. We don\'t store it and we never
-        sell data to third parties.</string>
 
-    <!-- Heading on location activity -->
-    <string name="location_why">We\'ll figure out who you need to call</string>
 
     <!-- Title of the Your Impact activity showing a user their stats [CHAR_LIMIT=30] -->
     <string name="stats_activity">Your Impact</string>
@@ -349,10 +340,6 @@
     <!-- Button to try loading data from the 5 Calls API again, shown after an error [CHAR_LIMIT=50] -->
     <string name="try_again_btn">Try again</string>
 
-    <!-- Prompt to enter an address or zip code instead of using the phone's GPS location [CHAR_LIMIT=NONE] -->
-    <string name="location_address_prompt">You can enter a zip code or address manually. If
-        your ZIP code is in more than one Congressional district we may show our best guess for your
-        representative in the House. Use an address or cross streets to more accurately locate you.</string>
 
     <!-- Hint text for edittext to enter an address or zip code for the user's location [CHAR_LIMIT=50] -->
     <string name="address_hint">Address or zip code</string>

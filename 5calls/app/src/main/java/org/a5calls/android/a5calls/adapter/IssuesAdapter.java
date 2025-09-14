@@ -55,7 +55,7 @@ public class IssuesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         void refreshIssues();
 
-        void launchLocationActivity();
+        void showLocationBottomSheet();
 
         void launchSearchDialog();
 
@@ -399,7 +399,7 @@ public class IssuesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             vh.locationButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mCallback.launchLocationActivity();
+                    mCallback.showLocationBottomSheet();
                 }
             });
         } else if (type == VIEW_TYPE_NO_SEARCH_MATCH) {

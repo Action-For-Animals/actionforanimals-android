@@ -19,11 +19,6 @@
         android:title="@string/menu_faq"
         />
 
-    <item
-        android:id="@+id/menu_location"
-        android:icon="@drawable/ic_gps_fixed_white_24dp"
-        android:title="@string/menu_location"
-        />
 
     <item
         android:id="@+id/menu_settings"

@@ -37,6 +37,7 @@ import android.view.ViewTreeObserver;
 import android.widget.TextView;
 import android.widget.LinearLayout;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -94,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements IssuesAdapter.Cal
     private FirebaseAuth mAuth = null;
 
     private ActivityMainBinding binding;
+    private LocationBottomSheetFragment currentLocationBottomSheet;
 
     private Snackbar mSnackbar;
 
@@ -113,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements IssuesAdapter.Cal
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
 
+
         try {
             mAuth = FirebaseAuth.getInstance();
         } catch (RuntimeException ex) {
@@ -130,11 +133,8 @@ public class MainActivity extends AppCompatActivity implements IssuesAdapter.Cal
 
         // Confirm the user has set a location.
         if (!accountManager.hasLocation(this)) {
-            // No location set, go to LocationActivity!
-            Intent intent = new Intent(this, LocationActivity.class);
-            startActivity(intent);
-            finish();
-            return;
+            // No location set, show bottom sheet to set location
+            // Will be shown after the activity is fully initialized
         }
 
         Intent intent = getIntent();
@@ -148,11 +148,13 @@ public class MainActivity extends AppCompatActivity implements IssuesAdapter.Cal
 
         setContentView(binding.getRoot());
 
-        setSupportActionBar(binding.toolbar);
+        // iOS-style header - no action bar needed
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
+            getSupportActionBar().hide();
         }
+        
+        // Setup iOS-style header interactions
+        setupIOSHeader();
 
         setupDrawerContent(binding.navigationView);
 
@@ -316,6 +318,13 @@ public class MainActivity extends AppCompatActivity implements IssuesAdapter.Cal
                 refreshIssues();
             }
         });
+
+        // Check if location needs to be set and show bottom sheet if needed
+        if (!accountManager.hasLocation(this)) {
+            binding.getRoot().post(() -> {
+                showLocationBottomSheet();
+            });
+        }
     }
 
     @Override
@@ -394,9 +403,6 @@ public class MainActivity extends AppCompatActivity implements IssuesAdapter.Cal
                         } else if (item.getItemId() == R.id.menu_faq) {
                             CustomTabsUtil.launchUrl(MainActivity.this, Uri.parse(getString(R.string.faq_url)));
                             return true;
-                        } else if (item.getItemId() == R.id.menu_location) {
-                            launchLocationActivity();
-                            return true;
                         }
 
                         return true;
@@ -404,18 +410,6 @@ public class MainActivity extends AppCompatActivity implements IssuesAdapter.Cal
                 });
     }
 
-    @Override
-    public void launchLocationActivity() {
-        // Clear it in case they change they location.
-        mIssuesAdapter.setContacts(new ArrayList<Contact>(), IssuesAdapter.NO_ERROR);
-        // We can show the warning again next time, because the location may have changed.
-        mShowLowAccuracyWarning = true;
-
-        Intent intent = new Intent(this, LocationActivity.class);
-        intent.putExtra(LocationActivity.ALLOW_HOME_UP_KEY, true);
-        intent.putExtra(IssueActivity.KEY_IS_LOW_ACCURACY, mIsLowAccuracy);
-        startActivity(intent);
-    }
 
     private void registerApiListener() {
         mIssuesRequestListener = new FiveCallsApi.IssuesRequestListener() {
@@ -459,7 +453,12 @@ public class MainActivity extends AppCompatActivity implements IssuesAdapter.Cal
 
             @Override
             public void onJsonError() {
-                showSnackbar(R.string.json_error, Snackbar.LENGTH_LONG);
+                // If we have an open location bottom sheet, show error there
+                if (currentLocationBottomSheet != null && currentLocationBottomSheet.isVisible()) {
+                    currentLocationBottomSheet.onLocationValidationError("Invalid or no data for this location. Try again later.");
+                } else {
+                    showSnackbar(R.string.json_error, Snackbar.LENGTH_LONG);
+                }
                 // Our only type of request in MainActivity is a GET. If it doesn't work, clear the
                 // active issues list to avoid showing a stale list.
                 mIssuesAdapter.setAddressError(IssuesAdapter.ERROR_REQUEST);
@@ -476,13 +475,20 @@ public class MainActivity extends AppCompatActivity implements IssuesAdapter.Cal
             @Override
             public void onContactsReceived(String locationName, boolean isLowAccuracy,
                                            List<Contact> contacts) {
+                // Always update with server-provided location name (server does the geocoding)
                 mLocationName = TextUtils.isEmpty(locationName) ?
                         getResources().getString(R.string.unknown_location) : locationName;
-                binding.collapsingToolbar.setTitle(mLocationName);
+                updateLocationHeader();
                 mIssuesAdapter.setContacts(contacts, IssuesAdapter.NO_ERROR);
                 mIsLowAccuracy = isLowAccuracy;
 
                 hideSnackbars();
+
+                // If we have an open location bottom sheet, dismiss it on successful validation
+                if (currentLocationBottomSheet != null && currentLocationBottomSheet.isVisible()) {
+                    currentLocationBottomSheet.onLocationValidationSuccess();
+                    currentLocationBottomSheet = null; // Clear reference
+                }
 
                 if (mShowLowAccuracyWarning) {
                     // Check if this is a split district by seeing if there are >2 reps in the house.
@@ -497,7 +503,7 @@ public class MainActivity extends AppCompatActivity implements IssuesAdapter.Cal
                                 R.string.low_accuracy_warning;
                         mSnackbar = Snackbar.make(binding.drawerLayout, warning,
                                         Snackbar.LENGTH_INDEFINITE)
-                                .setAction(R.string.update, view -> launchLocationActivity());
+                                .setAction(R.string.update, view -> showLocationBottomSheet());
                         mSnackbar.setActionTextColor(getResources().getColor(
                                 R.color.colorAccentLight));
                         mSnackbar.addCallback(new BaseTransientBottomBar.BaseCallback<>() {
@@ -568,13 +574,8 @@ public class MainActivity extends AppCompatActivity implements IssuesAdapter.Cal
     // Removed populateFilterAdapterIfNeeded method - no longer using filters
 
     private void loadStats() {
-        int callCount = AppSingleton.getInstance(getApplicationContext())
-                .getDatabaseHelper().getCallsCount();
-        if (callCount > 1) {
-            // Don't bother if it is less than 1.
-            binding.actionBarSubtitle.setText(String.format(
-                    getResources().getString(R.string.your_call_count_summary), callCount));
-        }
+        // iOS-style header doesn't show personal call count in header
+        // Call count tracking still works in the background for individual issues
     }
 
     private void showStats() {
@@ -593,6 +594,16 @@ public class MainActivity extends AppCompatActivity implements IssuesAdapter.Cal
             }
         }
         api.getIssues();
+    }
+
+    @Override
+    public void showLocationBottomSheet() {
+        currentLocationBottomSheet = LocationBottomSheetFragment.newInstance();
+        currentLocationBottomSheet.setLocationSetListener(location -> {
+            // Handle location input from bottom sheet
+            handleLocationInput(location);
+        });
+        currentLocationBottomSheet.show(getSupportFragmentManager(), "LocationBottomSheet");
     }
 
     private String getLocationString() {
@@ -646,7 +657,7 @@ public class MainActivity extends AppCompatActivity implements IssuesAdapter.Cal
         mSnackbar.setAction(R.string.update, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                launchLocationActivity();
+                showLocationBottomSheet();
             }
         });
         mSnackbar.show();
@@ -762,5 +773,65 @@ public class MainActivity extends AppCompatActivity implements IssuesAdapter.Cal
                     "", mSearchText, mSelectedCategories);
             }
         }
+    }
+    
+    private void setupIOSHeader() {
+        // Setup settings gear click
+        binding.settingsGear.setOnClickListener(v -> {
+            binding.drawerLayout.openDrawer(GravityCompat.START);
+        });
+        
+        // Setup location header click - show iOS-style bottom sheet
+        binding.locationHeader.setOnClickListener(v -> {
+            showLocationBottomSheet();
+        });
+        
+        // Initialize location display
+        updateLocationHeader();
+    }
+    
+    private void updateLocationHeader() {
+        TextView locationDescription = binding.locationDescription;
+        TextView locationText = binding.locationText;
+        ImageView locationIcon = binding.locationIcon;
+        
+        if (TextUtils.isEmpty(mLocationName) || mLocationName.equals(getString(R.string.unknown_location))) {
+            // No location set - single line
+            locationDescription.setVisibility(View.GONE);
+            locationIcon.setVisibility(View.GONE);
+            locationText.setText("Set Your Location");
+            locationText.setTextSize(16); // Smaller when no location set
+        } else {
+            // Location set - two lines like iOS
+            locationDescription.setVisibility(View.VISIBLE);
+            locationIcon.setVisibility(View.VISIBLE);
+            locationDescription.setText("Your location is:");
+            locationText.setText(mLocationName);
+            locationText.setTextSize(18); // Larger for the city name
+        }
+    }
+    
+    private void handleLocationInput(String location) {
+        // Handle both manual input and GPS detection
+        // Don't set mLocationName here - let server response set it to avoid flicker
+        
+        // For manual input, set the address
+        if (!"Current Location".equals(location)) {
+            accountManager.setAddress(this, location);
+        }
+        // For GPS detection, the coordinates and address are already set by the bottom sheet
+        
+        // Update member variables immediately so getLocationString() uses the new location
+        mAddress = accountManager.getAddress(this);
+        mLatitude = accountManager.getLat(this);
+        mLongitude = accountManager.getLng(this);
+        
+        // Clear existing contacts so new ones will be fetched for the new location
+        mIssuesAdapter.setContacts(new ArrayList<Contact>(), IssuesAdapter.NO_ERROR);
+        // We can show the warning again next time, because the location may have changed.
+        mShowLowAccuracyWarning = true;
+        
+        // Don't update header here - let server response update it to avoid flicker
+        refreshIssues();
     }
 }

@@ -225,8 +225,7 @@ public class IssueActivity extends AppCompatActivity {
 
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(IssueActivity.this, LocationActivity.class);
-                    startActivity(intent);
+                    showLocationBottomSheet();
                 }
             });
             return;
@@ -503,5 +502,15 @@ public class IssueActivity extends AppCompatActivity {
             Log.d(TAG, "Unable to parse created date: " + issue.createdAt);
         }
         return result.toString();
+    }
+
+    private void showLocationBottomSheet() {
+        LocationBottomSheetFragment bottomSheet = LocationBottomSheetFragment.newInstance();
+        bottomSheet.setLocationSetListener(location -> {
+            // Location was updated, finish this activity to return to main screen
+            // which will refresh with new location data
+            finish();
+        });
+        bottomSheet.show(getSupportFragmentManager(), "LocationBottomSheet");
     }
 }

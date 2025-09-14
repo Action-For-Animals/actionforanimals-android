@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bottom_sheet_background"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="40dp">
+
+    <!-- Handle for iOS-style drag indicator -->
+    <View
+        android:layout_width="36dp"
+        android:layout_height="5dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/bottom_sheet_handle"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="32dp" />
+
+    <!-- Input field with inline Enter button (iOS style) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="8dp">
+
+        <EditText
+            android:id="@+id/location_input"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:background="@drawable/ios_search_box_background"
+            android:hint="Enter a location"
+            android:paddingStart="16dp"
+            android:paddingEnd="8dp"
+            android:textSize="17sp"
+            android:textColor="@color/text_primary_modern"
+            android:textColorHint="@color/text_secondary_modern"
+            android:imeOptions="actionDone"
+            android:inputType="text" />
+
+        <ImageView
+            android:id="@+id/submit_location_button"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/ios_search_button_background"
+            android:src="@drawable/ic_search"
+            android:tint="@android:color/white"
+            android:scaleType="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground" />
+
+    </LinearLayout>
+
+    <!-- Helper text -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Use an address, zip code or zip +4"
+        android:textSize="13sp"
+        android:textColor="@color/text_secondary_modern"
+        android:gravity="start"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="24dp" />
+
+    <!-- "Or" text with Detect My Location button -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Or "
+            android:textSize="18sp"
+            android:textColor="@color/text_secondary_modern"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginEnd="12dp" />
+
+        <TextView
+            android:id="@+id/detect_location_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Detect My Location"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"
+            android:fontFamily="sans-serif-medium"
+            android:background="@drawable/ios_button_background"
+            android:drawableEnd="@drawable/ic_location_on"
+            android:drawableTint="@android:color/white"
+            android:drawablePadding="8dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground" />
+
+    </LinearLayout>
+
+    <!-- Error message -->
+    <TextView
+        android:id="@+id/location_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="14sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:visibility="gone" />
+
+</LinearLayout>

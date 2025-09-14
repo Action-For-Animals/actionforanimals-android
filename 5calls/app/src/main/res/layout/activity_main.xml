@@ -6,50 +6,154 @@
     style="@style/mainContainersStyle"
     tools:context="org.a5calls.android.a5calls.controller.MainActivity">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <RelativeLayout
         android:id="@+id/activity_main"
         style="@style/mainContainersStyle"
         android:background="@color/background_color">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appbar"
-            style="@style/mainContainersStyle"
-            android:layout_height="@dimen/app_bar_layout_size"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <!-- iOS-style fixed header -->
+        <LinearLayout
+            android:id="@+id/ios_header_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/background_color"
+            android:paddingTop="16dp">
 
-            <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:id="@+id/collapsing_toolbar"
-                style="@style/mainContainersStyle"
-                app:contentScrim="?attr/colorPrimary"
-                app:expandedTitleMarginBottom="72dp"
-                app:expandedTitleMarginEnd="48dp"
-                app:expandedTitleMarginStart="48dp"
-                app:expandedTitleTextAppearance="@style/AppTheme.CollapsingToolbar"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
-                app:statusBarScrim="@android:color/transparent">
+            <!-- MainHeader: Settings + Location + Stars -->
+            <LinearLayout
+                android:id="@+id/main_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="10dp"
+                android:gravity="center_vertical">
 
-                <TextView
-                    android:id="@+id/action_bar_subtitle"
-                    style="@style/mainTitleStyle"
-                    android:text="@string/about_p2"
-                    app:layout_collapseMode="parallax" />
+                <!-- Settings gear icon -->
+                <ImageView
+                    android:id="@+id/settings_gear"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/ic_settings_black_24dp"
+                    android:tint="@color/text_primary_modern"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
+                    android:padding="2dp"
+                    android:contentDescription="Settings" />
 
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                    app:layout_collapseMode="pin"
-                    app:popupTheme="@style/AppTheme.NoBarTheme.MainActivity" />
+                <!-- Spacer to center location header -->
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
 
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
+                <!-- Location header (centered, wraps content) -->
+                <LinearLayout
+                    android:id="@+id/location_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/location_header_background"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:focusable="true">
 
-        </com.google.android.material.appbar.AppBarLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <!-- VStack equivalent for two-line location text -->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:gravity="start">
+
+                            <!-- Small descriptive text (footnote size) -->
+                            <TextView
+                                android:id="@+id/location_description"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Your location is:"
+                                android:textSize="12sp"
+                                android:fontFamily="sans-serif"
+                                android:textColor="@color/text_secondary_modern"
+                                android:maxLines="1"
+                                android:ellipsize="end"
+                                android:visibility="gone" />
+
+                            <!-- Larger location name (title3 size, medium weight) -->
+                            <TextView
+                                android:id="@+id/location_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Set Your Location"
+                                android:textSize="18sp"
+                                android:fontFamily="sans-serif-medium"
+                                android:textColor="@color/text_primary_modern"
+                                android:maxLines="1"
+                                android:ellipsize="end" />
+
+                        </LinearLayout>
+
+                        <!-- Location icon (like iOS location.circle) -->
+                        <ImageView
+                            android:id="@+id/location_icon"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_location_on"
+                            android:tint="@color/text_secondary_modern"
+                            android:layout_marginStart="8dp"
+                            android:visibility="gone" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- Spacer to center location header -->
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
+                <!-- Stars branding -->
+                <ImageView
+                    android:id="@+id/stars_branding"
+                    android:layout_width="64dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/afa_stars"
+                    android:scaleType="fitCenter"
+                    android:contentDescription="Action for Animals" />
+
+            </LinearLayout>
+
+            <!-- Main title -->
+            <TextView
+                android:id="@+id/main_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Take Action For Animals"
+                android:textSize="22sp"
+                android:fontFamily="sans-serif-black"
+                android:textColor="@color/text_primary_modern"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="16dp"
+                android:gravity="start" />
+
+        </LinearLayout>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:layout_below="@id/ios_header_container"
             >
 
             <RelativeLayout
@@ -174,7 +278,7 @@
 
         </androidx.core.widget.NestedScrollView>
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation_view"

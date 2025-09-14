@@ -72,23 +72,7 @@
         <item name="android:textColor">@color/colorAccent</item>
     </style>
 
-    <style name="zipEditTextStyle">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_alignParentStart">true</item>
-        <item name="android:layout_toStartOf">@id/address_submit</item>
-        <item name="android:hint">@string/address_hint</item>
-        <item name="android:imeOptions">actionDone</item>
-        <item name="android:minHeight">@dimen/accessibility_min_size</item>
-    </style>
 
-    <style name="submitBtn" parent="genericButtonStyle">
-        <item name="android:layout_alignParentEnd">true</item>
-        <item name="android:layout_marginStart">@dimen/margin_text</item>
-        <item name="android:minWidth">@dimen/accessibility_min_size</item>
-        <item name="android:textColor">@color/colorPrimaryDark</item>
-        <item name="android:text">@string/submit</item>
-    </style>
 
     <style name="scrollViewStyle">
         <item name="android:layout_width">match_parent</item>
