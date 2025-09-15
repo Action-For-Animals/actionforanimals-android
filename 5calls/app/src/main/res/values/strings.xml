@@ -9,6 +9,12 @@
     <string name="welcome_location_description">We need your location to find your representatives and show relevant campaigns.</string>
     <string name="set_location">Set Location</string>
 
+    <!-- Issue detail screen content -->
+    <string name="set_location_header">SET YOUR LOCATION</string>
+    <string name="reps_list_header">REPRESENTATIVES</string>
+    <string name="target_company_header">TARGET COMPANY</string>
+    <string name="target_companies_header">TARGET COMPANIES</string>
+
     <!-- The button for submitting your address or zip code as location [CHAR_LIMIT=30] -->
     <string name="submit">submit</string>
 
@@ -452,22 +458,37 @@
     <string name="send_email">Send Email</string>
 
     <!-- Call result button for when the contact was unavailable (i.e. couldn't even leave a voicemail) [CHAR_LIMIT=30] -->
-    <string name="outcome_unavailable">unavailable</string>
+    <string name="outcome_unavailable">Unavailable</string>
 
     <!-- Call result button for when the user left a voicemail [CHAR_LIMIT=30] -->
-    <string name="outcome_voicemail">left voicemail</string>
+    <string name="outcome_voicemail">Voicemail</string>
 
     <!-- Call result button for when the user made contact [CHAR_LIMIT=30] -->
-    <string name="outcome_contact">made contact</string>
+    <string name="outcome_contact">Made contact</string>
 
     <!-- Call result button for when the user made contact and the contact supports the issue [CHAR_LIMIT=30] -->
-    <string name="outcome_yes">supports</string>
+    <string name="outcome_yes">Supports</string>
 
     <!-- Call result button for when the user made contact and the contact opposes the issue [CHAR_LIMIT=30] -->
-    <string name="outcome_no">opposes</string>
+    <string name="outcome_no">Opposes</string>
 
     <!-- Call result button for when the user made contact and the contact has not taken a stance on the issue [CHAR_LIMIT=30] -->
-    <string name="outcome_unknown">no stance</string>
+    <string name="outcome_unknown">No stance</string>
+
+    <!-- Skip outcome - doesn't send result to backend -->
+    <string name="outcome_skip">Skip</string>
+
+    <!-- Action count display strings -->
+    <string name="no_actions_taken">• No actions taken yet</string>
+    <string name="actions_taken_thousands">• %.1fK actions taken</string>
+    <string name="actions_taken">• %d actions taken</string>
+
+    <!-- Contact accessibility strings -->
+    <string name="contact_accessibility">Contact: %1$s%2$s</string>
+    <string name="contact_completed">, completed</string>
+
+    <!-- Button text -->
+    <string name="make_calls_button">Make Calls</string>
 
     <!-- Label for drop-down of filters for issues [CHAR_LIMIT=20] -->
     <string name="filter_label">Filter</string>

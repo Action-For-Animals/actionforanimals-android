@@ -542,4 +542,16 @@
     <!-- The categories an issue belongs to, when there are more than one. -->
     <string name="issue_category_many">Categorías:</string>
 
+    <!-- Action count display strings -->
+    <string name="no_actions_taken">• Aún no se han tomado acciones</string>
+    <string name="actions_taken_thousands">• %.1fK acciones tomadas</string>
+    <string name="actions_taken">• %d acciones tomadas</string>
+
+    <!-- Contact accessibility strings -->
+    <string name="contact_accessibility">Contacto: %1$s%2$s</string>
+    <string name="contact_completed">, completado</string>
+
+    <!-- Button text -->
+    <string name="make_calls_button">Hacer Llamadas</string>
+
 </resources>

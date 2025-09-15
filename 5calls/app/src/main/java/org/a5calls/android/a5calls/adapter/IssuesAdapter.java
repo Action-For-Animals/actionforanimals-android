@@ -225,7 +225,7 @@ public class IssuesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         // Add only the active ones.
         ArrayList<Issue> tempIssues = new ArrayList<>();
         for (Issue issue : mAllIssues) {
-            if (issue.active) {
+            if (issue.isActive()) {
                 tempIssues.add(issue);
             }
         }
@@ -333,6 +333,10 @@ public class IssuesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             IssueViewHolder vh = (IssueViewHolder) holder;
             final Issue issue = mIssues.get(position);
             vh.name.setText(issue.name);
+
+            // Apply status-based styling like iOS
+            applyStatusStyling(issue, vh);
+
             vh.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -449,6 +453,20 @@ public class IssuesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         return VIEW_TYPE_ISSUE;
     }
 
+    private void applyStatusStyling(Issue issue, IssueViewHolder vh) {
+        boolean isActive = issue.isActive();
+
+        if (!isActive) {
+            // Gray out inactive issues
+            vh.itemView.setAlpha(0.5f);
+            vh.name.setAlpha(0.5f);
+        } else {
+            // Active issues - normal appearance
+            vh.itemView.setAlpha(1.0f);
+            vh.name.setAlpha(1.0f);
+        }
+    }
+
     private void displayPreviousCallStats(Issue issue, IssueViewHolder vh) {
         DatabaseHelper dbHelper =  AppSingleton.getInstance(mActivity.getApplicationContext())
                 .getDatabaseHelper();
@@ -503,15 +521,16 @@ public class IssuesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private void setupCategoryIcon(Issue issue, IssueViewHolder vh) {
         // Get the primary category for the issue
         String categoryName = getPrimaryCategoryName(issue);
-        
+
         // Set the category icon (remove color filter to show original icon)
         int iconResource = getCategoryIconResource(categoryName);
         vh.categoryIcon.setImageResource(iconResource);
-        
-        // Check if all contacts have been called (campaign completed)
-        boolean isCompleted = isCampaignCompleted(issue);
-        if (isCompleted) {
+
+        // Show checkmark for success status (like iOS)
+        if (issue.isSuccess()) {
             vh.categoryCheckmark.setVisibility(View.VISIBLE);
+            // Don't override the src - it's already set to checked_small (white checkmark)
+            // Don't override the background - it's already set to green_checkmark_circle
         } else {
             vh.categoryCheckmark.setVisibility(View.GONE);
         }
@@ -671,12 +690,12 @@ public class IssuesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         
         String actionText;
         if (totalActions == 0) {
-            actionText = "• No actions taken yet";
+            actionText = mActivity.getString(R.string.no_actions_taken);
         } else if (totalActions >= 1000) {
             double thousands = totalActions / 1000.0;
-            actionText = String.format("• %.1fK actions taken", thousands);
+            actionText = mActivity.getString(R.string.actions_taken_thousands, thousands);
         } else {
-            actionText = String.format("• %d actions taken", totalActions);
+            actionText = mActivity.getString(R.string.actions_taken, totalActions);
         }
         
         vh.actionsTaken.setText(actionText);

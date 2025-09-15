@@ -2,141 +2,199 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/scroll_view"
-    style="@style/scrollViewStyle"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
     android:fitsSystemWindows="true">
 
     <LinearLayout
         android:id="@+id/rep_call_root"
-        style="@style/mainLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        >
+        android:padding="16dp">
 
+        <!-- Issue Title -->
         <TextView
-            style="@style/repCallTextStyle"
-            android:text="@string/call_count_today_one"
-            android:id="@+id/call_to_make_today_prompt"
-            />
-
-        <RelativeLayout
+            android:id="@+id/issue_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_text"
-            >
+            android:text="Issue Title"
+            android:textSize="22sp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/text_primary_modern"
+            android:paddingBottom="16dp"
+            android:lineSpacingExtra="2dp" />
 
-            <TextView
-                style="@style/issuePreviousCallStatsStyle"
-                android:layout_width="wrap_content"
-                android:layout_centerVertical="true"
-                android:id="@+id/previous_call_stats"
-                android:layout_alignParentStart="true"
-                app:drawableStartCompat="@drawable/checked_small"
-                />
-
-            <Button
-                style="@style/linkButtonStyle"
-                android:textAllCaps="false"
-                android:textAlignment="center"
-                android:id="@+id/previous_call_details"
-                android:layout_toEndOf="@id/previous_call_stats"
-                android:text="@string/details_btn"
-                />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/rep_info"
+        <!-- Contact Card -->
+        <LinearLayout
+            android:id="@+id/contact_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            >
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:background="@drawable/contact_card_background"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp">
 
-            <ImageView
-                android:id="@+id/rep_image"
-                style="@style/repImageStyle"
-                android:contentDescription="@null"
-                android:src="@drawable/baseline_person_52"
-                />
+            <!-- Contact Photo -->
+            <FrameLayout
+                android:layout_width="45dp"
+                android:layout_height="45dp">
 
+                <ImageView
+                    android:id="@+id/rep_image"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/circle_avatar_background"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="Representative photo" />
+
+                <TextView
+                    android:id="@+id/contact_initials"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:textColor="@android:color/white"
+                    android:fontFamily="sans-serif-medium"
+                    android:maxLines="1"
+                    android:visibility="gone" />
+
+            </FrameLayout>
+
+            <!-- Contact Info -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="12dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/contact_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary_modern"
+                    android:maxLines="1"
+                    android:ellipsize="end" />
+
+                <TextView
+                    android:id="@+id/contact_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="@color/text_secondary_modern"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:layout_marginTop="2dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Phone Number Section -->
+        <LinearLayout
+            android:id="@+id/phone_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="16dp">
+
+            <!-- Copied Phone Number Feedback -->
             <TextView
-                android:id="@+id/contact_name"
-                style="@style/contactNameStyle"
-                android:layout_toEndOf="@id/rep_image"
-                />
+                android:id="@+id/copied_phone_feedback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Copied: (555) 123-4567"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary_modern"
+                android:gravity="end"
+                android:visibility="gone"
+                android:paddingBottom="4dp" />
 
-            <org.a5calls.android.a5calls.controller.SingleLineResizableTextView
-                android:id="@+id/phone_number"
-                style="@style/SingleLineResizableStyle"
-                />
+            <!-- Phone Number with Local Office Button -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
-            <Button
-                android:id="@+id/local_office_button"
-                style="@style/localOffBtnRepCallStyle"
-                />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
 
-        </RelativeLayout>
+                <TextView
+                    android:id="@+id/phone_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="(555) 123-4567"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/afa_dark_blue_text"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:padding="8dp" />
 
+                <!-- Local Office Menu Button (iOS-style ellipsis) -->
+                <ImageButton
+                    android:id="@+id/local_office_button"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginStart="4dp"
+                    android:src="@drawable/ic_more_horiz_24dp"
+                    android:background="@drawable/circle_button_background"
+                    android:scaleType="center"
+                    android:contentDescription="Local office numbers"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Local Offices Section -->
         <LinearLayout
             android:id="@+id/field_office_section"
-            style="@style/issueLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginBottom="16dp"
-            >
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/field_office_prompt"
-                style="@style/repCallTextStyle"
-                android:layout_width="wrap_content"
-                />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary_modern"
+                android:paddingBottom="8dp" />
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/script_section"
-            style="@style/issueLinearLayout"
-            android:orientation="vertical"
 
-            >
 
-            <TextView
-                style="@style/repCallTextStyle"
-                android:text="@string/contact_reason_prompt"
-                />
-
-            <TextView
-                android:id="@+id/contact_reason"
-                style="@style/splashTextStyle"
-                android:layout_marginTop="@dimen/margin_top4"
-                android:textSize="@dimen/text_size_paragraph"
-                />
-
-            <TextView
-                android:id="@+id/contact_details"
-                style="@style/splashTextStyle"
-                android:layout_marginTop="@dimen/margin_top4"
-                android:textSize="@dimen/text_size_paragraph"
-                />
-
-            <TextView
-                style="@style/repCallTextStyle"
-                android:layout_marginTop="@dimen/margin_top8"
-                android:text="@string/call_script_prompt"
-                />
-
-            <TextView
-                android:id="@+id/call_script"
-                style="@style/callScriptTextStyle"
-                />
-
-        </LinearLayout>
-
+        <!-- Script Text -->
         <TextView
-            android:id="@+id/buttons_prompt"
-            style="@style/repCallTextStyle"
-            android:text="@string/buttons_prompt"
-            />
+            android:id="@+id/call_script"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/text_primary_modern"
+            android:lineSpacingExtra="4dp"
+            android:layout_marginBottom="24dp" />
 
+        <!-- Outcome Buttons -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/outcome_list"
-            style="@style/RecyclerViewStyle"
-            />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false" />
+
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

@@ -379,6 +379,7 @@ public class MainActivity extends AppCompatActivity implements IssuesAdapter.Cal
         issueIntent.putExtra(IssueActivity.KEY_IS_LOW_ACCURACY, mIsLowAccuracy);
         issueIntent.putExtra(IssueActivity.KEY_DONATE_IS_ON, mDonateIsOn);
         startActivityForResult(issueIntent, ISSUE_DETAIL_REQUEST);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
     private void setupDrawerContent(NavigationView navigationView) {

@@ -17,7 +17,8 @@ public class OutcomeAdapter extends RecyclerView.Adapter<OutcomeAdapter.ViewHold
     public static final List<Outcome> DEFAULT_OUTCOMES = Arrays.asList(
             new Outcome(Outcome.Status.UNAVAILABLE),
             new Outcome(Outcome.Status.VOICEMAIL),
-            new Outcome(Outcome.Status.CONTACT));
+            new Outcome(Outcome.Status.CONTACT),
+            new Outcome(Outcome.Status.SKIP));
 
     private List<Outcome> outcomes;
     private boolean enabled;

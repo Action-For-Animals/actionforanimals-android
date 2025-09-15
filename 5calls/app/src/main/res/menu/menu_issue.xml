@@ -2,15 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/menu_details"
-        android:title="@string/details_btn"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/info_24dp"
-        />
-    <item
         android:id="@+id/menu_share"
         android:title="@string/menu_share"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_share_white_24dp"
+        app:iconTint="@color/text_primary_modern"
         />
 </menu>

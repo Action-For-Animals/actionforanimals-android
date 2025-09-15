@@ -1,145 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:android.support.design="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    style="@style/scrollViewStyle"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
     android:fitsSystemWindows="true"
-    >
+    android:clipToPadding="false">
 
-    <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/scroll_view"
-        style="@style/nestedScrollViewStyleTop"
-        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
 
+        <!-- Issue Title -->
+        <TextView
+            android:id="@+id/issue_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/text_primary_modern"
+            android:paddingBottom="8dp"
+            android:lineSpacingExtra="2dp" />
+
+        <!-- Issue Description -->
+        <TextView
+            android:id="@+id/issue_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/text_primary_modern"
+            android:lineSpacingExtra="4dp"
+            android:paddingBottom="16dp"
+            android:autoLink="web" />
+
+        <!-- Location Setup Section (shown when no location is set for political campaigns) -->
         <LinearLayout
-            android:id="@+id/issue_section"
-            style="@style/issueLinearLayout"
+            android:id="@+id/location_setup_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingTop="@dimen/activity_vertical_margin"
-            android:paddingBottom="@dimen/activity_vertical_margin"
-            >
+            android:visibility="gone"
+            android:layout_marginBottom="16dp">
 
             <TextView
-                android:id="@+id/issue_name"
-                style="@style/issueHeadStyle"
-                />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/set_location_header"
+                android:textSize="12sp"
+                android:textColor="@color/text_secondary_modern"
+                android:paddingStart="6dp"
+                android:paddingBottom="8dp" />
 
-            <TextView
-                android:id="@+id/link"
-                style="@style/issueNameTextStyle"
-                />
-
-            <include
-                android:id="@+id/issue_done"
-                layout="@layout/issue_done_view"
-                />
-
-            <TextView
-                android:id="@+id/issue_description"
-                style="@style/issueDescriptionTextStyle"
-                />
+            <Button
+                android:id="@+id/set_location_button"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="@string/set_location"
+                android:textSize="16sp"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@android:color/white"
+                android:background="@drawable/primary_button_background"
+                android:drawableStart="@drawable/ic_location_on"
+                android:drawablePadding="8dp"
+                android:gravity="center"
+                android:textAllCaps="false" />
 
         </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
-
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/bottom_sheet"
-        style="@style/nestedScrollViewStyleDown"
-        android.support.design:ignore="UnusedAttribute"
-        app:behavior_hideable="false"
-        app:behavior_peekHeight="52dp"
-        app:layout_behavior="@string/bottom_sheet_behavior"
-        >
-
-        <LinearLayout style="@style/issueLinearLayout"
+        <!-- Contacts Section -->
+        <LinearLayout
+            android:id="@+id/contacts_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            >
+            android:layout_marginBottom="16dp">
 
-            <RelativeLayout
-                android:id="@+id/rep_prompt"
-                style="@style/issueRelativeLayoutStyle"
-                android:background="@color/colorAccent"
-                android:minHeight="@dimen/issue_height_relative_layout"
-                >
+            <!-- Contacts Section Header -->
+            <TextView
+                android:id="@+id/contacts_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/reps_list_header"
+                android:textSize="12sp"
+                android:textColor="@color/text_secondary_modern"
+                android:paddingStart="12dp"
+                android:paddingBottom="2dp" />
 
-                <ImageView
-                    android:id="@+id/expand_contacts_icon"
-                    style="@style/issueImageView"
-                    android:contentDescription="@null"
-                    />
-
-                <TextView
-                    style="@style/issueContactTextStyle"
-                    android:text="@string/rep_section_prompt"
-                    />
-
-            </RelativeLayout>
-
+            <!-- Contacts Container with rounded background -->
             <LinearLayout
-                android:id="@+id/rep_list"
-                style="@style/issueLinearLayout"
+                android:id="@+id/contacts_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:divider="@drawable/layout_divider"
+                android:background="@drawable/contacts_container_background"
+                android:divider="@drawable/contact_divider"
                 android:showDividers="middle"
-                />
+                android:paddingStart="0dp"
+                android:paddingEnd="0dp">
 
-            <RelativeLayout
-                android:id="@+id/no_calls_left"
-                style="@style/issueRelativeLayoutStyle"
-                android:background="@color/issue_background_color"
-                android:paddingTop="@dimen/activity_horizontal_margin"
-                android:paddingBottom="@dimen/activity_horizontal_margin"
-                android:visibility="gone"
-                >
+                <!-- Contact items will be added dynamically here -->
 
-                <TextView
-                    android:id="@+id/no_calls_message"
-                    style="@style/issueTextNoCallsStyle"
-                    android:text="@string/no_calls_left"
-                    android:textColor="@color/colorPrimary"
-                    />
-
-                <TextView
-                    android:id="@+id/split_district_warning"
-                    style="@style/issueTextNoCallsStyle"
-                    android:layout_below="@id/no_calls_message"
-                    android:layout_marginTop="@dimen/grid_padding"
-                    android:text="@string/error_address_invalid"
-                    android:layout_toStartOf="@+id/update_location_button"
-                    android:textColor="@color/colorPrimaryDark"
-                    />
-
-                <Button
-                    android:id="@id/update_location_button"
-                    style="@style/transparentBtnStyle"
-                    android:layout_alignBaseline="@id/split_district_warning"
-                    android:layout_alignParentEnd="true"
-                    android:text="@string/update"
-                    />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/no_contact_areas"
-                style="@style/issueRelativeLayoutStyle"
-                android:background="@color/issue_background_color"
-                android:paddingTop="@dimen/activity_horizontal_margin"
-                android:paddingBottom="@dimen/activity_horizontal_margin"
-                android:visibility="gone"
-                >
-
-                <TextView
-                    android:id="@+id/no_contact_areas_message"
-                    style="@style/issueTextNoCallsStyle"
-                    android:text="@string/no_contact_areas_message"
-                    android:textColor="@color/colorPrimary"
-                    />
-
-            </RelativeLayout>
+            </LinearLayout>
 
         </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
+        <!-- Action Buttons Section -->
+        <LinearLayout
+            android:id="@+id/action_buttons_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+            <!-- Primary Action Button -->
+            <Button
+                android:id="@+id/primary_action_button"
+                style="@style/makeCallsBtnStyle"
+                android:layout_gravity="center"
+                android:text="Make Calls"
+                android:drawableStart="@drawable/ic_phone"
+                android:drawablePadding="8dp"
+                android:paddingHorizontal="24dp"
+                android:textAllCaps="false" />
+
+            <!-- Secondary Action Buttons Container (hidden for now) -->
+            <LinearLayout
+                android:id="@+id/secondary_buttons_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <!-- Placeholder for future corporate campaign buttons -->
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Bottom spacing -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="32dp" />
+
+    </LinearLayout>
+
+</ScrollView>

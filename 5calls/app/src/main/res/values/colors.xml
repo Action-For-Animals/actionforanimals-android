@@ -30,4 +30,10 @@
     <color name="card_shadow">#1A000000</color>
     <color name="completion_checkmark">#28A745</color>
     <color name="avatar_background">#E9ECEF</color>
+    <color name="dark_background">#000000</color>
+    <color name="off_white">#F0F2F5</color>
+
+    <!-- iOS Color Equivalents -->
+    <color name="afa_dark_blue_text">#3EA63E</color>
+    <color name="afa_dark_blue">#3EA63E</color>
 </resources>

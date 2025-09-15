@@ -68,4 +68,5 @@
     <dimen name="badge_padding_horizontal">8dp</dimen>
     <dimen name="badge_padding_vertical">4dp</dimen>
     <dimen name="badge_corner_radius">6dp</dimen>
+    <dimen name="field_office_popup_min_width">240dp</dimen>
 </resources>

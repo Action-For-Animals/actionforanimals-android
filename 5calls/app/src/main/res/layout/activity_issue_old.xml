@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android.support.design="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/scrollViewStyle"
+    android:fitsSystemWindows="true"
+    >
+
+    <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/scroll_view"
+        style="@style/nestedScrollViewStyleTop"
+        >
+
+        <LinearLayout
+            android:id="@+id/issue_section"
+            style="@style/issueLinearLayout"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            >
+
+            <TextView
+                android:id="@+id/issue_name"
+                style="@style/issueHeadStyle"
+                />
+
+            <TextView
+                android:id="@+id/link"
+                style="@style/issueNameTextStyle"
+                />
+
+            <include
+                android:id="@+id/issue_done"
+                layout="@layout/issue_done_view"
+                />
+
+            <TextView
+                android:id="@+id/issue_description"
+                style="@style/issueDescriptionTextStyle"
+                />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/bottom_sheet"
+        style="@style/nestedScrollViewStyleDown"
+        android.support.design:ignore="UnusedAttribute"
+        app:behavior_hideable="false"
+        app:behavior_peekHeight="52dp"
+        app:layout_behavior="@string/bottom_sheet_behavior"
+        >
+
+        <LinearLayout style="@style/issueLinearLayout"
+            android:orientation="vertical"
+            >
+
+            <RelativeLayout
+                android:id="@+id/rep_prompt"
+                style="@style/issueRelativeLayoutStyle"
+                android:background="@color/colorAccent"
+                android:minHeight="@dimen/issue_height_relative_layout"
+                >
+
+                <ImageView
+                    android:id="@+id/expand_contacts_icon"
+                    style="@style/issueImageView"
+                    android:contentDescription="@null"
+                    />
+
+                <TextView
+                    style="@style/issueContactTextStyle"
+                    android:text="@string/rep_section_prompt"
+                    />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/rep_list"
+                style="@style/issueLinearLayout"
+                android:orientation="vertical"
+                android:divider="@drawable/layout_divider"
+                android:showDividers="middle"
+                />
+
+            <RelativeLayout
+                android:id="@+id/no_calls_left"
+                style="@style/issueRelativeLayoutStyle"
+                android:background="@color/issue_background_color"
+                android:paddingTop="@dimen/activity_horizontal_margin"
+                android:paddingBottom="@dimen/activity_horizontal_margin"
+                android:visibility="gone"
+                >
+
+                <TextView
+                    android:id="@+id/no_calls_message"
+                    style="@style/issueTextNoCallsStyle"
+                    android:text="@string/no_calls_left"
+                    android:textColor="@color/colorPrimary"
+                    />
+
+                <TextView
+                    android:id="@+id/split_district_warning"
+                    style="@style/issueTextNoCallsStyle"
+                    android:layout_below="@id/no_calls_message"
+                    android:layout_marginTop="@dimen/grid_padding"
+                    android:text="@string/error_address_invalid"
+                    android:layout_toStartOf="@+id/update_location_button"
+                    android:textColor="@color/colorPrimaryDark"
+                    />
+
+                <Button
+                    android:id="@id/update_location_button"
+                    style="@style/transparentBtnStyle"
+                    android:layout_alignBaseline="@id/split_district_warning"
+                    android:layout_alignParentEnd="true"
+                    android:text="@string/update"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/no_contact_areas"
+                style="@style/issueRelativeLayoutStyle"
+                android:background="@color/issue_background_color"
+                android:paddingTop="@dimen/activity_horizontal_margin"
+                android:paddingBottom="@dimen/activity_horizontal_margin"
+                android:visibility="gone"
+                >
+
+                <TextView
+                    android:id="@+id/no_contact_areas_message"
+                    style="@style/issueTextNoCallsStyle"
+                    android:text="@string/no_contact_areas_message"
+                    android:textColor="@color/colorPrimary"
+                    />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

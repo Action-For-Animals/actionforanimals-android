@@ -24,6 +24,10 @@ public class Contact implements Parcelable {
     public String district;
     public FieldOffice[] field_offices;
 
+    // Default constructor for creating test/empty contacts
+    public Contact() {
+    }
+
     protected Contact(Parcel in) {
         id = in.readString();
         name = in.readString();
