@@ -2,92 +2,87 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout="@layout/preference_list_ios_style"
     >
 
+    <!-- General Section -->
     <PreferenceCategory
-        android:title="@string/settings_category_notifications"
+        android:title="General"
+        android:layout="@layout/preference_category_ios_style"
         app:iconSpaceReserved="false"
         >
 
-        <ListPreference
-            android:title="@string/settings_notifications_enable_title"
-            android:key="prefsKeyNotifications"
-            android:summary="%s"
-            android:entries="@array/notification_options"
-            android:entryValues="@array/notification_options_values"
-            android:defaultValue="0"
-            app:iconSpaceReserved="false"
-            />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:title="@string/settings_category_reminders"
-        app:iconSpaceReserved="false"
-        >
-
-        <SwitchPreference
-            android:title="@string/settings_reminders_enable_title"
-            android:key="prefsKeyEnableReminders"
-            android:defaultValue="false"
-            android:summary="@string/settings_reminders_enable_summary"
-            android:disableDependentsState="false"
-            app:iconSpaceReserved="false"
-            />
-
-        <MultiSelectListPreference
-            android:title="@string/settings_reminder_days_title"
-            android:key="prefsKeyReminderDays"
-            android:dependency="prefsKeyEnableReminders"
-            android:entries="@array/reminder_days_titles"
-            android:entryValues="@array/reminder_days_values"
+        <Preference
+            android:title="Notifications"
+            android:key="notifications_settings"
+            android:layout="@layout/preference_ios_first"
             app:iconSpaceReserved="false"
             />
 
         <Preference
-            android:title="@string/settings_reminders_time_title"
-            android:key="prefsKeyReminderTimePlaceholder"
-            android:dependency="prefsKeyEnableReminders"
+            android:title="Scheduled Reminders"
+            android:key="reminders_settings"
+            android:layout="@layout/preference_ios_middle"
+            app:iconSpaceReserved="false"
+            />
+
+        <Preference
+            android:title="Feedback"
+            android:key="feedback_action"
+            android:layout="@layout/preference_ios_style_last"
             app:iconSpaceReserved="false"
             />
 
     </PreferenceCategory>
 
+    <!-- Social Section -->
     <PreferenceCategory
-        android:title="@string/settings_category_appearance"
+        android:title="Social"
+        android:layout="@layout/preference_category_ios_style"
         app:iconSpaceReserved="false"
         >
 
-        <EditTextPreference
-            android:key="prefsKeyUserName"
-            android:singleLine="true"
-            android:summary="@string/settings_name_description"
-            android:title="@string/settings_name"
+        <Preference
+            android:title="Instagram"
+            android:key="instagram_action"
+            android:layout="@layout/preference_ios_first"
             app:iconSpaceReserved="false"
             />
 
-        <ListPreference
-            android:key="prefsKeyScriptTextSize"
-            android:title="@string/script_text_size"
-            android:entries="@array/script_text_size_labels"
-            android:entryValues="@array/script_text_size_values"
-            android:defaultValue="@string/script_text_size_normal_sp"
-            android:summary="%s"
+        <Preference
+            android:title="Share Action for Animals"
+            android:key="share_app_action"
+            android:layout="@layout/preference_ios_middle"
+            app:iconSpaceReserved="false"
+            />
+
+        <Preference
+            android:title="Rate Action for Animals"
+            android:key="rate_app_action"
+            android:layout="@layout/preference_ios_style_last"
             app:iconSpaceReserved="false"
             />
 
     </PreferenceCategory>
 
+    <!-- Credits Section -->
     <PreferenceCategory
-        android:title="@string/settings_category_general"
+        android:title="Credits"
+        android:layout="@layout/preference_category_ios_style"
         app:iconSpaceReserved="false"
         >
 
-        <SwitchPreference
-            android:title="@string/setting_usage_title"
-            android:defaultValue="true"
-            android:summary="@string/settings_usage_summary"
-            android:key="prefsKeyAllowAnalytics"
+        <Preference
+            android:title="5calls"
+            android:key="fivecalls_credit"
+            android:layout="@layout/preference_ios_first"
+            app:iconSpaceReserved="false"
+            />
+
+        <Preference
+            android:title="Open Source Libraries"
+            android:key="open_source_action"
+            android:layout="@layout/preference_ios_style_last"
             app:iconSpaceReserved="false"
             />
 

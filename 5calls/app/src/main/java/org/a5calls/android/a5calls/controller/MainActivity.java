@@ -387,22 +387,11 @@ public class MainActivity extends AppCompatActivity implements IssuesAdapter.Cal
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        //menuItem.setChecked(true); // don't use this atm
                         binding.drawerLayout.closeDrawers();
 
-                        if (item.getItemId() == R.id.menu_about) {
-                            Intent intent = new Intent(MainActivity.this, AboutActivity.class);
-                            startActivity(intent);
-                            return true;
-                        } else if (item.getItemId() == R.id.menu_stats) {
-                            showStats();
-                            return true;
-                        } else if (item.getItemId() == R.id.menu_settings) {
+                        if (item.getItemId() == R.id.menu_settings) {
                             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
                             startActivity(intent);
-                            return true;
-                        } else if (item.getItemId() == R.id.menu_faq) {
-                            CustomTabsUtil.launchUrl(MainActivity.this, Uri.parse(getString(R.string.faq_url)));
                             return true;
                         }
 
@@ -579,10 +568,6 @@ public class MainActivity extends AppCompatActivity implements IssuesAdapter.Cal
         // Call count tracking still works in the background for individual issues
     }
 
-    private void showStats() {
-        Intent intent = new Intent(this, StatsActivity.class);
-        startActivity(intent);
-    }
 
     @Override
     public void refreshIssues() {
@@ -777,9 +762,10 @@ public class MainActivity extends AppCompatActivity implements IssuesAdapter.Cal
     }
     
     private void setupIOSHeader() {
-        // Setup settings gear click
+        // Setup settings gear click - directly open settings
         binding.settingsGear.setOnClickListener(v -> {
-            binding.drawerLayout.openDrawer(GravityCompat.START);
+            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(intent);
         });
         
         // Setup location header click - show iOS-style bottom sheet

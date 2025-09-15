@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingStart="32dp"
+    android:paddingEnd="32dp"
+    android:paddingTop="15dp"
+    android:paddingBottom="15dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:minHeight="50dp"
+    android:gravity="center_vertical"
+    android:background="@drawable/preference_clean_background">
+
+    <!-- Title -->
+    <TextView
+        android:id="@android:id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="17sp"
+        android:textColor="#000000"
+        android:fontFamily="sans-serif"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:background="@android:color/transparent" />
+
+    <!-- Summary - Hidden -->
+    <TextView
+        android:id="@android:id/summary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <!-- Switch Widget -->
+    <Switch
+        android:id="@android:id/switch_widget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:focusable="false"
+        android:clickable="false"
+        android:enabled="true"
+        android:alpha="1.0" />
+
+</LinearLayout>

@@ -36,4 +36,9 @@
     <!-- iOS Color Equivalents -->
     <color name="afa_dark_blue_text">#3EA63E</color>
     <color name="afa_dark_blue">#3EA63E</color>
+
+    <!-- Switch Colors -->
+    <color name="switch_thumb_color">#FFFFFF</color>
+    <color name="switch_track_color">#2E8C2E</color>
+    <color name="switch_track_off_color">#E5E5EA</color>
 </resources>

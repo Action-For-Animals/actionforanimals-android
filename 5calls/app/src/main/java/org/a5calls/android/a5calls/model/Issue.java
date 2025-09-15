@@ -23,6 +23,7 @@ public class Issue implements Parcelable {
 
     public List<Contact> contacts;
     public List<String> contactAreas;
+    public String contactType;
     public List<Outcome> outcomeModels;
     public Category[] categories;
     public boolean isSplit;
@@ -41,6 +42,7 @@ public class Issue implements Parcelable {
         createdAt = in.readString();
         contacts = in.createTypedArrayList(Contact.CREATOR);
         contactAreas = in.createStringArrayList();
+        contactType = in.readString();
         outcomeModels = in.createTypedArrayList(Outcome.CREATOR);
         categories = in.createTypedArray(Category.CREATOR);
         stats = IssueStats.CREATOR.createFromParcel(in);
@@ -77,6 +79,7 @@ public class Issue implements Parcelable {
         dest.writeString(createdAt);
         dest.writeTypedList(contacts);
         dest.writeStringList(contactAreas);
+        dest.writeString(contactType);
         dest.writeTypedList(outcomeModels);
         dest.writeTypedArray(categories, PARCELABLE_WRITE_RETURN_VALUE);
         stats.writeToParcel(dest, flags);

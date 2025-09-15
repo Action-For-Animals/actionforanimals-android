@@ -15,6 +15,7 @@ import androidx.core.app.NotificationManagerCompat;
 import androidx.core.app.TaskStackBuilder;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.preference.ListPreference;
@@ -26,7 +27,10 @@ import androidx.preference.SwitchPreference;
 
 import android.text.TextUtils;
 import android.text.format.DateFormat;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.webkit.WebView;
 
 import com.onesignal.Continue;
 import com.onesignal.OneSignal;
@@ -73,6 +77,9 @@ public class SettingsActivity extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction().replace(R.id.content, new SettingsFragment())
                 .commit();
+
+        // Apply slide-in animation from left to right
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
     @Override
@@ -96,6 +103,13 @@ public class SettingsActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        // Apply slide-out animation from right to left when closing
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
     public static void turnOnReminders(Context context, AccountManager manager) {
@@ -149,167 +163,153 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
-    public static class SettingsFragment extends PreferenceFragmentCompat implements
-            SharedPreferences.OnSharedPreferenceChangeListener {
+    public static class SettingsFragment extends PreferenceFragmentCompat {
         private final AccountManager accountManager = AccountManager.Instance;
-        private ActivityResultLauncher<String> mNotificationPermissionRequest;
-
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            mNotificationPermissionRequest = createNotificationPermissionRequest(this, (isGranted) -> {
-                // If the user denied the notification permission, set the preference to false
-                // Otherwise they granted and we will set the permission to true
-                accountManager.setAllowReminders(getActivity(), isGranted);
-                if (!isGranted) {
-                    SwitchPreference remindersPref =
-                            findPreference(AccountManager.KEY_ALLOW_REMINDERS);
-                    if (remindersPref == null) {
-                        return;
-                    }
-                    remindersPref.setChecked(false);
-                    remindersPref.setSummary(R.string.reminders_disabled_summary);
-                }
-            });
-        }
 
         @Override
         public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
             addPreferencesFromResource(R.xml.settings);
 
-            boolean hasReminders = accountManager.getAllowReminders(getActivity());
-            ((SwitchPreference) findPreference(AccountManager.KEY_ALLOW_REMINDERS))
-                    .setChecked(hasReminders);
+            // Set up click listeners for all preference items
+            setupPreferenceClickListeners();
+        }
 
-            Set<String> reminderDays = accountManager.getReminderDays(getActivity());
-            MultiSelectListPreference daysPreference =
-                    (MultiSelectListPreference) findPreference(AccountManager.KEY_REMINDER_DAYS);
-            daysPreference.setValues(reminderDays);
-            updateReminderDaysSummary(daysPreference, reminderDays);
-
-            Preference timePreference = findPreference("prefsKeyReminderTimePlaceholder");
-            timePreference.setOnPreferenceClickListener(preference -> {
-                final TimePickerFragment dialog = new TimePickerFragment();
-                dialog.setCallback((hourOfDay, minute) -> {
-                    final int reminderMinutes = hourOfDay * 60 + minute;
-                    accountManager.setReminderMinutes(requireContext(), reminderMinutes);
-                    updateReminderTimeSummary(timePreference);
+        private void setupPreferenceClickListeners() {
+            // Notifications settings
+            Preference notificationsPref = findPreference("notifications_settings");
+            if (notificationsPref != null) {
+                notificationsPref.setOnPreferenceClickListener(preference -> {
+                    Intent intent = new Intent(getActivity(), NotificationSettingsActivity.class);
+                    startActivity(intent);
+                    return true;
                 });
-                dialog.show(getParentFragmentManager(), "timePicker");
-                return true;
-            });
-            updateReminderTimeSummary(timePreference);
+            }
 
-            String notificationSetting = accountManager.getNotificationPreference(getActivity());
-            ListPreference notificationPref =
-                    (ListPreference) findPreference(AccountManager.KEY_NOTIFICATIONS);
-            notificationPref.setValue(notificationSetting);
-        }
+            // Reminders settings
+            Preference remindersPref = findPreference("reminders_settings");
+            if (remindersPref != null) {
+                remindersPref.setOnPreferenceClickListener(preference -> {
+                    Intent intent = new Intent(getActivity(), ReminderSettingsActivity.class);
+                    startActivity(intent);
+                    return true;
+                });
+            }
 
-        @Override
-        public void onResume() {
-            super.onResume();
-            PreferenceManager.getDefaultSharedPreferences(getActivity())
-                    .registerOnSharedPreferenceChangeListener(this);
-        }
+            // Feedback
+            Preference feedbackPref = findPreference("feedback_action");
+            if (feedbackPref != null) {
+                feedbackPref.setOnPreferenceClickListener(preference -> {
+                    openFeedback();
+                    return true;
+                });
+            }
 
-        @Override
-        public void onPause() {
-            super.onPause();
-            PreferenceManager.getDefaultSharedPreferences(getActivity())
-                    .unregisterOnSharedPreferenceChangeListener(this);
-        }
+            // Instagram
+            Preference instagramPref = findPreference("instagram_action");
+            if (instagramPref != null) {
+                instagramPref.setOnPreferenceClickListener(preference -> {
+                    openInstagram();
+                    return true;
+                });
+            }
 
-        @Override
-        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            if (TextUtils.equals(key, AccountManager.KEY_ALLOW_ANALYTICS)) {
-                boolean result = sharedPreferences.getBoolean(key, true);
-                accountManager.setAllowAnalytics(getActivity(), result);
-            } else if (TextUtils.equals(key, AccountManager.KEY_ALLOW_REMINDERS)) {
-                boolean result = sharedPreferences.getBoolean(key, false);
-                if (result &&
-                        !NotificationManagerCompat.from(requireContext()).areNotificationsEnabled()) {
-                    // Trying to enable reminders and notification permission is not granted
-                    if (mNotificationPermissionRequest != null
-                            && Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                        mNotificationPermissionRequest.launch(Manifest.permission.POST_NOTIFICATIONS);
-                    }
-                } else {
-                    // Either disabling reminders or notification permission is already granted
-                    // so we don't need to prompt
-                    accountManager.setAllowReminders(getActivity(), result);
-                }
+            // Share app
+            Preference sharePref = findPreference("share_app_action");
+            if (sharePref != null) {
+                sharePref.setOnPreferenceClickListener(preference -> {
+                    shareApp();
+                    return true;
+                });
+            }
 
-            } else if (TextUtils.equals(key, AccountManager.KEY_REMINDER_DAYS)) {
-                Set<String> result = sharedPreferences.getStringSet(key,
-                        AccountManager.DEFAULT_REMINDER_DAYS);
-                accountManager.setReminderDays(getActivity(), result);
-                updateReminderDaysSummary((MultiSelectListPreference) findPreference(
-                        AccountManager.KEY_REMINDER_DAYS), result);
-            } else if (TextUtils.equals(key, AccountManager.KEY_NOTIFICATIONS)) {
-                String result = sharedPreferences.getString(key,
-                        AccountManager.DEFAULT_NOTIFICATION_SELECTION);
-                updateNotificationsPreference((FiveCallsApplication) getActivity().getApplication(),
-                        accountManager, result);
-            } else if (TextUtils.equals(key, AccountManager.KEY_USER_NAME)) {
-                String result = sharedPreferences.getString(key, null);
-                if (result != null) {
-                    result = result.trim();
-                    AccountManager.Instance.setUserName(getActivity(), result);
-                } else {
-                    AccountManager.Instance.setUserName(getActivity(), null);
-                }
-            } else if (TextUtils.equals(key, "prefsKeyScriptTextSize")) {
-                String value = sharedPreferences.getString(AccountManager.KEY_SCRIPT_TEXT_SIZE_SP, getString(R.string.script_text_size_normal_sp));
-                AccountManager.Instance.setScriptTextSize(getActivity(), Float.parseFloat(value));
+            // Rate app
+            Preference ratePref = findPreference("rate_app_action");
+            if (ratePref != null) {
+                ratePref.setOnPreferenceClickListener(preference -> {
+                    rateApp();
+                    return true;
+                });
+            }
+
+            // 5calls credit
+            Preference fivecallsPref = findPreference("fivecalls_credit");
+            if (fivecallsPref != null) {
+                fivecallsPref.setOnPreferenceClickListener(preference -> {
+                    open5CallsLink();
+                    return true;
+                });
+            }
+
+            // Open source
+            Preference openSourcePref = findPreference("open_source_action");
+            if (openSourcePref != null) {
+                openSourcePref.setOnPreferenceClickListener(preference -> {
+                    showOpenSourceLicenses();
+                    return true;
+                });
             }
         }
 
-        @Override
-        public void onStop() {
-            turnOnReminders(getActivity(), accountManager);
-            super.onStop();
+        private void openFeedback() {
+            Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+            emailIntent.setData(android.net.Uri.parse("mailto:howdyxfa@gmail.com"));
+            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Action for Animals Feedback");
+            try {
+                startActivity(Intent.createChooser(emailIntent, "Send feedback"));
+            } catch (android.content.ActivityNotFoundException ex) {
+                // No email app available
+            }
         }
 
-        private void updateReminderDaysSummary(MultiSelectListPreference daysPreference,
-                                               Set<String> savedValues) {
-            if (savedValues == null || savedValues.size() == 0) {
-                daysPreference.setSummary(getActivity().getResources().getString(
-                        R.string.no_days_selected));
-                return;
+        private void openInstagram() {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(android.net.Uri.parse("https://www.instagram.com/xfaorg/"));
+            try {
+                startActivity(intent);
+            } catch (android.content.ActivityNotFoundException ex) {
+                // No browser available
             }
-            List<String> daysEntries = Arrays.asList(getActivity().getResources()
-                    .getStringArray(R.array.reminder_days_titles));
-            List<String> daysEntriesValues = Arrays.asList(getActivity().getResources()
-                    .getStringArray(R.array.reminder_days_values));
-            String summary = "";
-            for (int i = 0; i < daysEntriesValues.size(); i++) {
-                if (savedValues.contains(daysEntriesValues.get(i))) {
-                    if (!TextUtils.isEmpty(summary)) {
-                        summary += ", ";
-                    }
-                    summary += daysEntries.get(i);
-                }
-            }
-            daysPreference.setSummary(summary);
         }
 
-        private void updateReminderTimeSummary(Preference timePreference) {
-            Calendar c = Calendar.getInstance();
-            int storedMinutes = accountManager.getReminderMinutes(requireContext());
-            int hour = storedMinutes / 60;
-            int minutes = storedMinutes % 60;
-
-            c.set(Calendar.HOUR_OF_DAY, hour);
-            c.set(Calendar.MINUTE, minutes);
-
-            final SimpleDateFormat dateFormat;
-            if (DateFormat.is24HourFormat(requireContext())) {
-                dateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
-            } else {
-                dateFormat = new SimpleDateFormat("hh:mm a", Locale.getDefault());
-            }
-            timePreference.setSummary(dateFormat.format(c.getTime()));
+        private void shareApp() {
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_TEXT, "Check out Action for Animals app: https://play.google.com/store/apps/details?id=" + requireContext().getPackageName());
+            startActivity(Intent.createChooser(shareIntent, "Share Action for Animals"));
         }
+
+        private void rateApp() {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(android.net.Uri.parse("market://details?id=" + requireContext().getPackageName()));
+            try {
+                startActivity(intent);
+            } catch (android.content.ActivityNotFoundException ex) {
+                // Fallback to web version
+                intent.setData(android.net.Uri.parse("https://play.google.com/store/apps/details?id=" + requireContext().getPackageName()));
+                startActivity(intent);
+            }
+        }
+
+        private void open5CallsLink() {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(android.net.Uri.parse("https://github.com/5calls"));
+            try {
+                startActivity(intent);
+            } catch (android.content.ActivityNotFoundException ex) {
+                // No browser available
+            }
+        }
+
+        // Inspired by https://www.bignerdranch.com/blog/open-source-licenses-and-android/
+        private void showOpenSourceLicenses() {
+            WebView view = (WebView) LayoutInflater.from(getContext()).inflate(R.layout.licence_view, null);
+            view.loadUrl("file:///android_asset/licenses.html");
+            new AlertDialog.Builder(requireContext())
+                    .setTitle(getString(R.string.license_btn))
+                    .setView(view)
+                    .setPositiveButton(android.R.string.ok, null)
+                    .show();
+        }
+
     }
 }

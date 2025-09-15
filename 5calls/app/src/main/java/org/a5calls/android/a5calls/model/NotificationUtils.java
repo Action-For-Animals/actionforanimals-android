@@ -99,9 +99,12 @@ public class NotificationUtils {
         NotificationManager mNotificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         String name = context.getResources().getString(R.string.app_name);
+        String description = "Notifications to remind you to take action";
         NotificationChannel channel = new NotificationChannel(NotifyBroadcastReceiver.CHANNEL_ID,
-                name, NotificationManager.IMPORTANCE_LOW);
-        // TODO: Could set sounds and vibration here.
+                name, NotificationManager.IMPORTANCE_DEFAULT);
+        channel.setDescription(description);
+        channel.enableVibration(true);
+        channel.setShowBadge(true);
         mNotificationManager.createNotificationChannel(channel);
 
 

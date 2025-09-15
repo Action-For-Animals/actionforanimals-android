@@ -604,6 +604,45 @@
         <item name="android:theme">@style/AppTheme</item>
     </style>
 
+    <!-- Time Picker Dialog Theme with better AM/PM visibility -->
+    <style name="TimePickerDialogTheme" parent="Theme.MaterialComponents.Light.Dialog">
+        <item name="colorPrimary">#2E8C2E</item>
+        <item name="colorAccent">#2E8C2E</item>
+        <item name="android:buttonBarButtonStyle">@style/TimePickerButton</item>
+        <item name="android:textColorHighlight">@android:color/transparent</item>
+        <item name="android:textColorHint">#666666</item>
+        <item name="android:colorControlHighlight">@android:color/transparent</item>
+        <item name="android:colorControlActivated">#2E8C2E</item>
+        <item name="android:textSelectHandleLeft">@android:color/transparent</item>
+        <item name="android:textSelectHandleRight">@android:color/transparent</item>
+        <item name="android:textSelectHandle">@android:color/transparent</item>
+    </style>
+
+    <!-- Time Picker Button Style -->
+    <style name="TimePickerButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">#2E8C2E</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:minWidth">64dp</item>
+        <item name="android:minHeight">48dp</item>
+    </style>
+
+    <!-- Time Picker Text Appearance -->
+    <style name="TimePickerTextAppearance" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">#000000</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <!-- Spinner Time Picker Theme -->
+    <style name="SpinnerTimePickerTheme" parent="Theme.MaterialComponents.Light.Dialog">
+        <item name="android:timePickerMode">spinner</item>
+        <item name="colorPrimary">#2E8C2E</item>
+        <item name="colorAccent">#2E8C2E</item>
+    </style>
+
     <style name="repListRelativeStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/load_more_height</item>

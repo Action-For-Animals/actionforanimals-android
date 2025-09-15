@@ -50,10 +50,25 @@
         <activity android:name=".controller.WelcomeActivity"
             android:theme="@style/AppTheme.NoBarTheme" />
         <activity android:name=".controller.SettingsActivity"
+            android:theme="@style/AppTheme.Settings"
             android:parentActivityName=".controller.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".controller.MainActivity" />
+        </activity>
+        <activity android:name=".controller.NotificationSettingsActivity"
+            android:theme="@style/AppTheme.Settings"
+            android:parentActivityName=".controller.SettingsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".controller.SettingsActivity" />
+        </activity>
+        <activity android:name=".controller.ReminderSettingsActivity"
+            android:theme="@style/AppTheme.Settings"
+            android:parentActivityName=".controller.SettingsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".controller.SettingsActivity" />
         </activity>
         <activity android:name=".controller.StatsActivity"
             android:label="@string/stats_activity"

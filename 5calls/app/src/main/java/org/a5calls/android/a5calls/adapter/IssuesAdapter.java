@@ -117,21 +117,21 @@ public class IssuesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             // filter or search.
             mErrorType = NO_ERROR;
         }
-        
+
         // Start with all issues or filter by category first
         List<Issue> filteredIssues;
         if (TextUtils.equals(filterText,
                 mActivity.getResources().getString(R.string.all_issues_filter))) {
-            // Include everything
-            filteredIssues = mAllIssues;
+            // Include everything, but filter by contact type
+            filteredIssues = filterByContactType(mAllIssues);
         } else if (TextUtils.equals(filterText,
                 mActivity.getResources().getString(R.string.top_issues_filter))) {
-            filteredIssues = filterActiveIssues();
+            filteredIssues = filterByContactType(filterActiveIssues());
         } else {
-            // Filter by the category string.
-            filteredIssues = filterIssuesByCategory(filterText);
+            // Filter by the category string, then by contact type
+            filteredIssues = filterByContactType(filterIssuesByCategory(filterText));
         }
-        
+
         // Then apply search text filter if needed
         if (!TextUtils.isEmpty(searchText)) {
             mIssues = filterIssuesBySearchText(searchText, filteredIssues);
@@ -143,7 +143,7 @@ public class IssuesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             // No search text, use category-filtered results
             mIssues = (ArrayList<Issue>) filteredIssues;
         }
-        
+
         notifyDataSetChanged();
     }
 
@@ -153,23 +153,23 @@ public class IssuesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             // filter or search.
             mErrorType = NO_ERROR;
         }
-        
+
         // Start with all issues or filter by category first
         List<Issue> filteredIssues;
         if (selectedCategories.isEmpty()) {
             // No categories selected - show all or apply other filters
             if (TextUtils.equals(filterText,
                     mActivity.getResources().getString(R.string.all_issues_filter))) {
-                filteredIssues = mAllIssues;
+                filteredIssues = filterByContactType(mAllIssues);
             } else if (TextUtils.equals(filterText,
                     mActivity.getResources().getString(R.string.top_issues_filter))) {
-                filteredIssues = filterActiveIssues();
+                filteredIssues = filterByContactType(filterActiveIssues());
             } else {
-                filteredIssues = mAllIssues;
+                filteredIssues = filterByContactType(mAllIssues);
             }
         } else {
             // Filter by selected categories (multi-select)
-            filteredIssues = filterIssuesByMultipleCategories(selectedCategories);
+            filteredIssues = filterByContactType(filterIssuesByMultipleCategories(selectedCategories));
         }
         
         // Then apply search text filter if needed
@@ -244,6 +244,17 @@ public class IssuesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             }
         }
         return tempIssues;
+    }
+
+    private ArrayList<Issue> filterByContactType(List<Issue> issues) {
+        ArrayList<Issue> filteredIssues = new ArrayList<>();
+        for (Issue issue : issues) {
+            // Only show issues with contactType "REPS" (congressional representatives)
+            if ("REPS".equals(issue.contactType)) {
+                filteredIssues.add(issue);
+            }
+        }
+        return filteredIssues;
     }
 
     private ArrayList<Issue> filterIssuesByCategory(String activeCategory) {

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout="@layout/preference_list_ios_style"
+    >
+
+    <PreferenceCategory
+        android:layout="@layout/preference_category_ios_style"
+        app:iconSpaceReserved="false"
+        >
+
+        <SwitchPreference
+            android:title="Turn On Reminders"
+            android:key="prefsKeyEnableReminders"
+            android:defaultValue="false"
+            android:layout="@layout/preference_ios_switch_first"
+            app:iconSpaceReserved="false"
+            />
+
+        <MultiSelectListPreference
+            android:title="Days"
+            android:key="prefsKeyReminderDays"
+            android:dependency="prefsKeyEnableReminders"
+            android:entries="@array/reminder_days_titles"
+            android:entryValues="@array/reminder_days_values"
+            android:layout="@layout/preference_ios_middle"
+            app:iconSpaceReserved="false"
+            />
+
+        <Preference
+            android:title="Time"
+            android:key="reminder_time"
+            android:dependency="prefsKeyEnableReminders"
+            android:layout="@layout/preference_ios_style_last"
+            app:iconSpaceReserved="false"
+            />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
