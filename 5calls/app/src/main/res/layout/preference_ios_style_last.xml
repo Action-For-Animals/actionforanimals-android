@@ -19,7 +19,8 @@
         android:paddingBottom="12dp"
         android:minHeight="44dp"
         android:gravity="center_vertical"
-        android:background="@drawable/preference_last_background">
+        android:background="@drawable/preference_category_card"
+        android:elevation="2dp">
 
         <!-- White content background -->
         <LinearLayout

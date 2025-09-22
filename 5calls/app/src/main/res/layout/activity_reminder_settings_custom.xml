@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="0dp"
+    android:background="@android:color/white"
+    android:fillViewport="true"
+    android:fitsSystemWindows="true"
+    android:paddingTop="?attr/actionBarSize">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="8dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="16dp">
+
+
+        <!-- Single Outer Card Container -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="@android:color/white"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/outline_variant">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <!-- Daily Reminder Section -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="24dp"
+                    android:paddingEnd="24dp">
+
+                    <!-- Bell Icon -->
+                    <ImageView
+                        android:id="@+id/reminder_icon"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_notifications"
+                        android:tint="@color/primary"
+                        android:layout_marginEnd="16dp"
+                        android:contentDescription="@null" />
+
+                    <!-- Content -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <!-- Title -->
+                        <TextView
+                            android:id="@+id/reminder_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Daily Reminder"
+                            android:textSize="18sp"
+                            android:textColor="@color/on_surface"
+                            android:fontFamily="sans-serif-medium" />
+
+                        <!-- Status -->
+                        <TextView
+                            android:id="@+id/reminder_status"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Active"
+                            android:textSize="14sp"
+                            android:textColor="@color/on_surface_variant"
+                            android:layout_marginTop="4dp" />
+
+                    </LinearLayout>
+
+                    <!-- Switch -->
+                    <Switch
+                        android:id="@+id/reminder_switch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:scaleX="1.2"
+                        android:scaleY="1.2"
+                        android:transformPivotX="0dp"
+                        android:transformPivotY="0dp"
+                        android:layout_marginEnd="12dp"
+                        app:thumbTint="@color/switch_thumb_color"
+                        app:trackTint="@color/switch_track_color" />
+
+                </LinearLayout>
+
+                <!-- Divider -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/outline_variant"
+                    android:layout_marginBottom="24dp" />
+
+                <!-- Time Selection Section -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingBottom="24dp">
+
+                    <!-- Time Header -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="16dp">
+
+                        <!-- Clock Icon -->
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_access_time"
+                            android:tint="@color/primary"
+                            android:layout_marginEnd="12dp"
+                            android:contentDescription="@null" />
+
+                        <!-- Time Label -->
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Time"
+                            android:textSize="16sp"
+                            android:textColor="@color/on_surface"
+                            android:fontFamily="sans-serif-medium" />
+
+                    </LinearLayout>
+
+                    <!-- Time Display -->
+                    <TextView
+                        android:id="@+id/time_display"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="9:00 AM"
+                        android:textSize="24sp"
+                        android:textColor="@color/primary"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center"
+                        android:padding="16dp"
+                        android:background="@drawable/time_display_background"
+                        android:clickable="true"
+                        android:focusable="true" />
+
+                </LinearLayout>
+
+                <!-- Divider -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/outline_variant"
+                    android:layout_marginBottom="24dp" />
+
+                <!-- Days Selection Section -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingBottom="24dp">
+
+                    <!-- Days Header -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="16dp">
+
+                        <!-- Calendar Icon -->
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_calendar_today"
+                            android:tint="@color/primary"
+                            android:layout_marginEnd="12dp"
+                            android:contentDescription="@null" />
+
+                        <!-- Days Label -->
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Days"
+                            android:textSize="16sp"
+                            android:textColor="@color/on_surface"
+                            android:fontFamily="sans-serif-medium" />
+
+                    </LinearLayout>
+
+                    <!-- Day Buttons -->
+                    <LinearLayout
+                        android:id="@+id/days_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_marginBottom="12dp">
+
+                        <!-- Day buttons will be added programmatically -->
+
+                    </LinearLayout>
+
+                    <!-- Days Summary -->
+                    <TextView
+                        android:id="@+id/days_summary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Weekdays"
+                        android:textSize="14sp"
+                        android:textColor="@color/on_surface_variant"
+                        android:gravity="center" />
+
+                </LinearLayout>
+
+                <!-- Divider -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/outline_variant"
+                    android:layout_marginBottom="24dp" />
+
+                <!-- Preview Section -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@color/surface_variant"
+                    android:padding="16dp"
+                    android:layout_marginTop="8dp">
+
+                    <!-- Preview Header -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="12dp">
+
+                        <!-- Bell Icon -->
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_notifications"
+                            android:tint="@color/primary"
+                            android:layout_marginEnd="12dp"
+                            android:contentDescription="@null" />
+
+                        <!-- Preview Label -->
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Reminder Preview"
+                            android:textSize="16sp"
+                            android:textColor="@color/on_surface"
+                            android:fontFamily="sans-serif-medium" />
+
+                    </LinearLayout>
+
+                    <!-- Preview Text -->
+                    <TextView
+                        android:id="@+id/preview_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="&quot;Time to check your app!&quot; at 9:00 AM on weekdays."
+                        android:textSize="14sp"
+                        android:textColor="@color/on_surface_variant"
+                        android:lineSpacingExtra="4dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+</ScrollView>

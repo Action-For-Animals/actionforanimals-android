@@ -657,4 +657,22 @@
     <!-- The categories an issue belongs to, when there are more than one. -->
     <string name="issue_category_many">Categories: </string>
 
+    <!-- Settings item for reminders [CHAR_LIMIT=30] -->
+    <string name="settings_reminders">Reminders</string>
+
+    <!-- The prompt on the location page to have a user set their location [CHAR_LIMIT=NONE] -->
+    <string name="location_prompt">Set your location to find your representatives.</string>
+
+    <!-- Menu option to update the location for the app [CHAR_LIMIT=25] -->
+    <string name="menu_location">Update location</string>
+
+    <!-- Inform the user their location is private -->
+    <string name="location_private">Your location is private. We don\'t store it and never sell your data.</string>
+
+    <!-- Heading on location activity -->
+    <string name="location_why">We\'ll identify who you need to call</string>
+
+    <!-- Prompt to enter an address or zip code instead of using the phone's GPS location [CHAR_LIMIT=NONE] -->
+    <string name="location_address_prompt">You can enter a zip code or address manually. If your zip code is in more than one Congressional district, we\'ll show you the most likely representative for your area. Use an address or cross street for more precise location.</string>
+
 </resources>

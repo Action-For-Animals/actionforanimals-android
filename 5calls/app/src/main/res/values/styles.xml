@@ -805,4 +805,81 @@
         <item name="android:foreground">?android:attr/selectableItemBackground</item>
     </style>
 
+    <!-- Modern Typography System -->
+    <style name="TextAppearance.Modern.Display">
+        <item name="android:textSize">@dimen/text_size_display</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textColor">@color/on_surface</item>
+        <item name="android:letterSpacing">-0.02</item>
+    </style>
+
+    <style name="TextAppearance.Modern.Headline">
+        <item name="android:textSize">@dimen/text_size_headline</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/on_surface</item>
+        <item name="android:letterSpacing">-0.01</item>
+    </style>
+
+    <style name="TextAppearance.Modern.Title">
+        <item name="android:textSize">@dimen/text_size_title</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/on_surface</item>
+    </style>
+
+    <style name="TextAppearance.Modern.Subtitle">
+        <item name="android:textSize">@dimen/text_size_subtitle</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/on_surface</item>
+    </style>
+
+    <style name="TextAppearance.Modern.Body">
+        <item name="android:textSize">@dimen/text_size_body</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/on_surface</item>
+        <item name="android:lineSpacingExtra">2dp</item>
+    </style>
+
+    <style name="TextAppearance.Modern.Caption">
+        <item name="android:textSize">@dimen/text_size_caption</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/on_surface_variant</item>
+    </style>
+
+    <!-- Modern Button Styles -->
+    <style name="Button.Modern.Primary" parent="Widget.MaterialComponents.Button">
+        <item name="android:textColor">@color/on_primary</item>
+        <item name="backgroundTint">@color/primary</item>
+        <item name="cornerRadius">@dimen/radius_md</item>
+        <item name="android:minHeight">@dimen/touch_target_large</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="Button.Modern.Secondary" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textColor">@color/primary</item>
+        <item name="strokeColor">@color/primary</item>
+        <item name="cornerRadius">@dimen/radius_md</item>
+        <item name="android:minHeight">@dimen/touch_target_large</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <!-- Modern Card Styles -->
+    <style name="Card.Modern" parent="Widget.MaterialComponents.CardView">
+        <item name="cardCornerRadius">@dimen/radius_lg</item>
+        <item name="cardElevation">@dimen/elevation_card</item>
+        <item name="cardBackgroundColor">@color/surface</item>
+        <item name="android:layout_margin">@dimen/spacing_sm</item>
+    </style>
+
+    <!-- Modern Input Styles -->
+    <style name="TextInputLayout.Modern" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">@dimen/radius_md</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/radius_md</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/radius_md</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/radius_md</item>
+        <item name="hintTextColor">@color/on_surface_variant</item>
+        <item name="boxStrokeColor">@color/outline</item>
+    </style>
+
 </resources>

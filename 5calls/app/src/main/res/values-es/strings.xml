@@ -554,4 +554,7 @@
     <!-- Button text -->
     <string name="make_calls_button">Hacer Llamadas</string>
 
+    <!-- Settings item for reminders [CHAR_LIMIT=30] -->
+    <string name="settings_reminders">Recordatorios</string>
+
 </resources>

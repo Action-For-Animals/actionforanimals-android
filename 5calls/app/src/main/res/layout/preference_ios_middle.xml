@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_marginStart="16dp"
-    android:layout_marginEnd="16dp"
+    android:layout_marginStart="@dimen/spacing_md"
+    android:layout_marginEnd="@dimen/spacing_md"
     android:background="@android:color/transparent">
 
     <!-- Main preference content -->
@@ -12,61 +13,66 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:paddingTop="12dp"
-        android:paddingBottom="12dp"
-        android:minHeight="44dp"
+        android:paddingStart="@dimen/spacing_md"
+        android:paddingEnd="@dimen/spacing_md"
+        android:paddingTop="@dimen/spacing_md"
+        android:paddingBottom="@dimen/spacing_md"
+        android:minHeight="@dimen/touch_target_large"
         android:gravity="center_vertical"
-        android:background="@drawable/preference_middle_background">
+        android:background="@android:color/white">
 
-        <!-- White content background -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:background="@android:color/white">
+        <!-- Icon -->
+        <ImageView
+            android:id="@+id/preference_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_calendar_today"
+            android:tint="@color/primary"
+            android:layout_marginEnd="@dimen/spacing_md"
+            android:contentDescription="@null" />
 
-            <!-- Title -->
-            <TextView
-                android:id="@android:id/title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="17sp"
-                android:textColor="#000000"
-                android:fontFamily="sans-serif"
-                android:singleLine="true"
-                android:ellipsize="end"
-                android:background="@android:color/white" />
+        <!-- Title -->
+        <TextView
+            android:id="@android:id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="@dimen/text_size_subtitle"
+            android:textColor="@color/on_surface"
+            android:fontFamily="sans-serif-medium"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:background="@android:color/transparent" />
 
-            <!-- Summary - Hidden -->
-            <TextView
-                android:id="@android:id/summary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone" />
+        <!-- Summary -->
+        <TextView
+            android:id="@android:id/summary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_body"
+            android:textColor="@color/on_surface_variant"
+            android:fontFamily="sans-serif"
+            android:layout_marginEnd="@dimen/spacing_sm"
+            android:maxLines="1"
+            android:ellipsize="end" />
 
-            <!-- Chevron -->
-            <ImageView
-                android:id="@+id/chevron"
-                android:layout_width="8dp"
-                android:layout_height="13dp"
-                android:layout_marginStart="8dp"
-                android:src="@drawable/ic_chevron_right_ios"
-                android:tint="#AEAEB2"
-                android:contentDescription="@null" />
-
-        </LinearLayout>
+        <!-- Modern Chevron -->
+        <ImageView
+            android:id="@+id/chevron"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="@dimen/spacing_sm"
+            android:src="@drawable/ic_chevron_right"
+            android:tint="@color/on_surface_variant"
+            android:contentDescription="@null" />
 
     </LinearLayout>
 
-    <!-- iOS-style separator -->
+    <!-- Modern separator -->
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:layout_marginStart="16dp"
-        android:background="#C6C6C8" />
+        android:layout_marginStart="@dimen/spacing_md"
+        android:background="@color/outline" />
 
 </LinearLayout>

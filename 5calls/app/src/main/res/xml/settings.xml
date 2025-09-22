@@ -2,35 +2,29 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout="@layout/preference_list_ios_style"
     >
 
     <!-- General Section -->
     <PreferenceCategory
         android:title="General"
-        android:layout="@layout/preference_category_ios_style"
-        app:iconSpaceReserved="false"
         >
 
         <Preference
             android:title="Notifications"
             android:key="notifications_settings"
-            android:layout="@layout/preference_ios_first"
-            app:iconSpaceReserved="false"
+            android:icon="@drawable/ic_notifications"
             />
 
         <Preference
             android:title="Scheduled Reminders"
             android:key="reminders_settings"
-            android:layout="@layout/preference_ios_middle"
-            app:iconSpaceReserved="false"
+            android:icon="@drawable/ic_access_time"
             />
 
         <Preference
             android:title="Feedback"
             android:key="feedback_action"
-            android:layout="@layout/preference_ios_style_last"
-            app:iconSpaceReserved="false"
+            android:icon="@drawable/ic_settings"
             />
 
     </PreferenceCategory>
@@ -38,29 +32,24 @@
     <!-- Social Section -->
     <PreferenceCategory
         android:title="Social"
-        android:layout="@layout/preference_category_ios_style"
-        app:iconSpaceReserved="false"
         >
 
         <Preference
             android:title="Instagram"
             android:key="instagram_action"
-            android:layout="@layout/preference_ios_first"
-            app:iconSpaceReserved="false"
+            android:icon="@drawable/ic_settings"
             />
 
         <Preference
             android:title="Share Action for Animals"
             android:key="share_app_action"
-            android:layout="@layout/preference_ios_middle"
-            app:iconSpaceReserved="false"
+            android:icon="@drawable/ic_settings"
             />
 
         <Preference
             android:title="Rate Action for Animals"
             android:key="rate_app_action"
-            android:layout="@layout/preference_ios_style_last"
-            app:iconSpaceReserved="false"
+            android:icon="@drawable/ic_settings"
             />
 
     </PreferenceCategory>
@@ -68,22 +57,18 @@
     <!-- Credits Section -->
     <PreferenceCategory
         android:title="Credits"
-        android:layout="@layout/preference_category_ios_style"
-        app:iconSpaceReserved="false"
         >
 
         <Preference
             android:title="5calls"
             android:key="fivecalls_credit"
-            android:layout="@layout/preference_ios_first"
-            app:iconSpaceReserved="false"
+            android:icon="@drawable/ic_settings"
             />
 
         <Preference
             android:title="Open Source Libraries"
             android:key="open_source_action"
-            android:layout="@layout/preference_ios_style_last"
-            app:iconSpaceReserved="false"
+            android:icon="@drawable/ic_settings"
             />
 
     </PreferenceCategory>

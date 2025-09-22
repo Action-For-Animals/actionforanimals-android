@@ -7,7 +7,7 @@
         <item name="colorPrimaryDark">#1D5F15</item>
         <item name="colorAccent">#2E8C2E</item>
         <item name="colorSecondary">#2E8C2E</item>
-        <item name="android:windowBackground">#F2F2F7</item>
+        <item name="android:windowBackground">@android:color/white</item>
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.iOS</item>
         <item name="actionBarTheme">@style/ActionBar.Settings</item>
         <item name="colorOnPrimary">#FFFFFF</item>
@@ -19,11 +19,12 @@
     <!-- iOS-style Preference Theme -->
     <style name="PreferenceThemeOverlay.iOS" parent="PreferenceThemeOverlay">
         <item name="preferenceCategoryTitleTextAppearance">@style/PreferenceCategoryTitleTextAppearance.iOS</item>
+        <item name="preferenceCategoryStyle">@style/PreferenceCategory.Card</item>
         <item name="preferenceStyle">@style/Preference.iOS</item>
         <item name="android:divider">@android:color/transparent</item>
         <item name="android:dividerHeight">0dp</item>
-        <item name="android:background">#F2F2F7</item>
-        <item name="android:colorBackground">#F2F2F7</item>
+        <item name="android:background">@color/background</item>
+        <item name="android:colorBackground">@android:color/white</item>
         <item name="colorControlActivated">#2E8C2E</item>
         <item name="colorAccent">#2E8C2E</item>
         <item name="switchPreferenceStyle">@style/SwitchPreference.iOS</item>
@@ -54,6 +55,8 @@
         <item name="android:textColorPrimary">#FFFFFF</item>
         <item name="titleTextColor">#FFFFFF</item>
         <item name="android:background">#2E8C2E</item>
+        <item name="displayOptions">showTitle|showCustom</item>
+        <item name="android:gravity">center</item>
     </style>
 
     <!-- Switch styling -->
@@ -62,6 +65,9 @@
         <item name="colorSwitchThumbNormal">#FFFFFF</item>
         <item name="colorControlNormal">#E5E5EA</item>
         <item name="android:alpha">1.0</item>
+        <item name="android:enabled">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
     </style>
 
     <!-- SwitchPreference styling -->
@@ -70,6 +76,29 @@
         <item name="allowDividerAbove">false</item>
         <item name="allowDividerBelow">false</item>
         <item name="android:enabled">true</item>
+    </style>
+
+    <!-- Card-style PreferenceCategory -->
+    <style name="PreferenceCategory.Card" parent="Preference.Category.Material">
+        <item name="android:layout_marginStart">0dp</item>
+        <item name="android:layout_marginEnd">0dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:background">@drawable/preference_category_card</item>
+        <item name="android:padding">16dp</item>
+    </style>
+
+    <!-- Floating Settings theme for overlay effect -->
+    <style name="AppTheme.Settings.Floating" parent="AppTheme.Settings">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@style/FloatingWindowAnimation</item>
+    </style>
+
+    <!-- Floating window animation -->
+    <style name="FloatingWindowAnimation">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_in_bottom</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_out_bottom</item>
     </style>
 
 </resources>

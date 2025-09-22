@@ -34,12 +34,15 @@
                 <!-- Settings gear icon -->
                 <ImageView
                     android:id="@+id/settings_gear"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
                     android:src="@drawable/ic_settings_black_24dp"
+                    android:scaleType="centerInside"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
                     android:tint="@color/text_primary_modern"
                     android:background="?android:attr/selectableItemBackgroundBorderless"
-                    android:padding="2dp"
+                    android:padding="8dp"
                     android:contentDescription="Settings" />
 
                 <!-- Spacer to center location header -->
@@ -150,16 +153,12 @@
 
         </LinearLayout>
 
-        <androidx.core.widget.NestedScrollView
+        <!-- Use RelativeLayout to maintain proper positioning -->
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/ios_header_container"
             >
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
 
                 <FrameLayout
                     android:layout_width="match_parent"
@@ -257,26 +256,23 @@
 
                 </HorizontalScrollView>
 
-                <!-- The size will be set programmatically to match the window size, which makes
-                     the view fill the screen properly. -->
+                <!-- Use proper RecyclerView with SwipeRefreshLayout -->
                 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                     android:id="@+id/swipe_container"
                     android:layout_width="match_parent"
-                    android:layout_height="800dp"
-                    android:layout_alignParentBottom="true"
+                    android:layout_height="match_parent"
                     android:layout_below="@id/category_filter_container"
                     >
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/issues_recycler_view"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:nestedScrollingEnabled="true" />
 
                 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-            </RelativeLayout>
-
-        </androidx.core.widget.NestedScrollView>
+        </RelativeLayout>
 
     </RelativeLayout>
 

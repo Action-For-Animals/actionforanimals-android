@@ -16,6 +16,7 @@
             android:defaultValue="false"
             android:layout="@layout/preference_ios_switch_first"
             app:iconSpaceReserved="false"
+            app:icon="@drawable/ic_notifications"
             />
 
         <MultiSelectListPreference
@@ -26,6 +27,7 @@
             android:entryValues="@array/reminder_days_values"
             android:layout="@layout/preference_ios_middle"
             app:iconSpaceReserved="false"
+            app:icon="@drawable/ic_calendar_today"
             />
 
         <Preference
@@ -34,6 +36,7 @@
             android:dependency="prefsKeyEnableReminders"
             android:layout="@layout/preference_ios_style_last"
             app:iconSpaceReserved="false"
+            app:icon="@drawable/ic_access_time"
             />
 
     </PreferenceCategory>
